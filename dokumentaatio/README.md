@@ -30,3 +30,6 @@ Before entering the game area player can choose a username. Usernames are displa
 [komentorivi.txt](https://github.com/alexalgrund/ot-harjoitustyo/blob/master/laskarit/viikko1/komentorivi.txt)
 
 [työaikakirjanpito](https://github.com/ohjelmistotekniikka-hy/python-todo-app/blob/master/dokumentaatio/tuntikirjanpito.md)
+
+
+a
