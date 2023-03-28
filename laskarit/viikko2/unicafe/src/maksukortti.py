@@ -1,3 +1,5 @@
+maara = 100
+
 class Maksukortti:
     def __init__(self, saldo):
         # saldo on senteissä
@@ -9,7 +11,6 @@ class Maksukortti:
     def ota_rahaa(self, maara):
         if self.saldo < maara:
             return False
-
         self.saldo = self.saldo - maara
         return True
 
