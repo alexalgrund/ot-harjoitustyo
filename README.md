@@ -22,7 +22,7 @@ Before entering the game area player can choose a username. Usernames are displa
 
 - The idea of game could be divided in several parts: different difficulty levels et cetera.
 - Multiplayer possibility.
-- The visual image of game: static or dynamic graphics.
+- The visual image of game: static or dynamic graphics?
 
 
 [gitlog.txt](https://github.com/alexalgrund/ot-harjoitustyo/blob/master/laskarit/viikko1/gitlog.txt)
