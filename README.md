@@ -1,6 +1,6 @@
 # Ohjelmistotekniikan harjoitustyö
 
-Olen rakentamassa** Arcade-tyylisen** pelin, jossa väistellään hirviöitä
+Olen rakentamassa**Arcade-tyylisen** pelin, jossa väistellään hirviöitä
 ja saavutetaan pisteitä keräämällä kolikoita.
 
 _Mahdollisia ominaisuuksia:_
