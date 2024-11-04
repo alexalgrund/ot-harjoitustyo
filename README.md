@@ -8,4 +8,4 @@ _Mahdollisia ominaisuuksia:_
 - Tilasto-ominaisuus
 - Hahmovalinta.
 
-[Tervetuloa dokumentaatioon](/laskarit)
+[Laskarit](/laskarit)
