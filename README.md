@@ -7,3 +7,5 @@ _Mahdollisia ominaisuuksia:_
 - Vaikeustason nousu
 - Tilasto-ominaisuus
 - Hahmovalinta.
+
+[Tervetuloa dokumentaatioon](docs/laskarit)
