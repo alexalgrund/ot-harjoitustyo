@@ -27,4 +27,4 @@ Before entering the game area player can choose a username. Usernames are displa
 
 [laskarit](/laskarit)
 
-[työaikakirjanpito](https://github.com/ohjelmistotekniikka-hy/python-todo-app/blob/master/dokumentaatio/tuntikirjanpito.md)
+[työaikakirjanpito](/dokumentaatio/tuntikirjanpito.md)
