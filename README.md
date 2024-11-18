@@ -27,4 +27,4 @@ Before entering the game area player can choose a username. Usernames are displa
 
 [laskarit](/laskarit)
 
-[työaikakirjanpito](/dokumentaatio/tuntikirjanpito)
+[työaikakirjanpito](/dokumentaatio/tuntikirjanpito.md)
