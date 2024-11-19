@@ -1,30 +1,23 @@
-# Requirements specification
+# Vaatimusmäärittely
 
+## Kuvaus
 
+Pieni videopeli, jossa pelaaja kerää pisteitä keräämällä erilaisia esineitä samalla, kun välttelee hirviöitä. Peli päättyy, kun hirviö saavuttaa pelaajan.
 
-## Description
+## Käyttöliittymän kuvaus
 
-A small video game where the player gets points by gathering different items while trying to avoid contact with monsters. Game ends when a monster
-reaches player.
+Aluksi pelaajalle näytetään infosivu, joka kertoo pelin idean. Pelaaja voi valita aloittavansa pelin tai tarkastella parhaita tuloksia.  
+Jos pelaaja valitsee pelin aloittamisen, ennen varsinaisen pelialueen käynnistymistä näkyy muutaman sekunnin lähtölaskenta, joka antaa pelaajalle aikaa valmistautua.
 
+Pelin päättyessä näytetään "Game over" -näkymä. Pelaaja voi tämän jälkeen joko poistua pelistä tai aloittaa uuden pelin.
 
-## The image of operating system
+Ennen pelialueelle siirtymistä pelaaja voi valita käyttäjänimen. Käyttäjänimet näkyvät parhaiden tulosten listassa.
 
-At first sight there will be info screen telling player the idea of game. Player can choose to start the game or see the list of best scores.
-If player choose to start the game there will be a countdown of couple of seconds giving player enough time to get ready.
+## Tulevaisuuden kehitysideat
 
-When game ends "Game over" screen is displayed. Player may then exit or start a new game.
+- Pelin ideaa voisi laajentaa useisiin osioihin: esimerkiksi eri vaikeustasot ja niin edelleen.
+- Moninpelimahdollisuus.
+- Pelin visuaalinen ilme: staattiset vai dynaamiset grafiikat?
 
-Before entering the game area player can choose a username. Usernames are displayed in the top scores.
-
-
-## Matters to think in future
-
-- The idea of game could be divided in several parts: different difficulty levels et cetera.
-- Multiplayer possibility.
-- The visual image of game: static or dynamic graphics?
-
-
-[laskarit](/laskarit)
-
+[laskarit](/laskarit)  
 [työaikakirjanpito](/dokumentaatio/tuntikirjanpito.md)
