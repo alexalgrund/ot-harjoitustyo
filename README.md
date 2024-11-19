@@ -20,4 +20,5 @@ Ennen pelialueelle siirtymistä pelaaja voi valita käyttäjänimen. Käyttäjä
 - Pelin visuaalinen ilme: staattiset vai dynaamiset grafiikat?
 
 [työaikakirjanpito](/dokumentaatio/tuntikirjanpito.md)
-[vaatimusmäärittely](/dokumentaatio/vaatimusmäärittely.md)
+
+[vaatimusmaarittely](/dokumentaatio/vaatimusmäärittely.md)
