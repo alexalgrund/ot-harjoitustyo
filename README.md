@@ -21,4 +21,4 @@ Ennen pelialueelle siirtymistä pelaaja voi valita käyttäjänimen. Käyttäjä
 
 [työaikakirjanpito](/dokumentaatio/tuntikirjanpito.md)
 
-[vaatimusmaarittely](/dokumentaatio/vaatimusmäärittely.md)
+[vaatimusäärittely](/dokumentaatio/vaatimusmaarittely.md)
