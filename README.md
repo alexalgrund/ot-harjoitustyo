@@ -19,6 +19,6 @@ Ennen pelialueelle siirtymistä pelaaja voi valita käyttäjänimen. Käyttäjä
 - Moninpelimahdollisuus.
 - Pelin visuaalinen ilme: staattiset vai dynaamiset grafiikat?
 
-[työaikakirjanpito](/dokumentaatio/tuntikirjanpito.md)
+[Työaikakirjanpito](/dokumentaatio/tuntikirjanpito.md)
 
-[vaatimusäärittely](/dokumentaatio/vaatimusmaarittely.md)
+[Vaatimusäärittely](/dokumentaatio/vaatimusmaarittely.md)
