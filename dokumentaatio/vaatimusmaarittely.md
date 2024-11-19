@@ -10,7 +10,8 @@ Pelaajat.
 
 ## Käyttöliittymäluonnos
 
-Päävalikko 
+Päävalikko
+
 -> Aloita uusi peli -> Aloittaa uuden pelin, palaa päävalikkoon tai siirtyy tarkastelemaan tilastonäkymää.
 
 -> Tarkastelee tilastonäkymää. -> Poistuu takaisin päävalikkoon.
