@@ -8,7 +8,7 @@ class CutleryHunt:
         pygame.init()
         pygame.mixer.init()
         pygame.display.set_caption("The Great Cutlery Hunt of Horrible Horrors")
-
+        
         self.download_pics()
         self.download_voices()
         self.create_database()
