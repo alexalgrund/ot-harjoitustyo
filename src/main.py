@@ -1,4 +1,5 @@
 import pygame
+import sys
 import sqlite3
 from random import randint
 
@@ -42,16 +43,13 @@ class CutleryHunt:
         except:
             pass
 
-    def draw_screen(self): #Draws the main game screen.
+    def draw_screen(self):
         self.screen.fill((80, 0, 0))
 
-        i = 0
-        ii = 0
-        while i < 17:
+        for ii in range(0, 55 * 17, 55):
             self.screen.blit(self.wallPic, (ii, 0))
             self.screen.blit(self.wallPic, (ii, 720))
-            i += 1
-            ii += 55
+
     
     def clock(self): #Displays the timer of main game.
         currentTime = f"TIME {self.clockTime[0]:02}:{self.clockTime[1]:02}:{self.clockTime[2]:02}"
@@ -88,24 +86,21 @@ class CutleryHunt:
  
         while True:
             self.draw_screen()
-            i = 0
-            ii = 130
-            while i < len(statsText):
-                introText1 = self.font2.render(statsText[i], True, (255, 0, 0))
-                self.screen.blit(introText1, (255, ii))
-                i += 1
-                ii += 50
+
+            for i, text in enumerate(statsText):
+                introText1 = self.font2.render(text, True, (255, 0, 0))
+                self.screen.blit(introText1, (255, 130 + i * 50))
 
             for keypress in pygame.event.get():
-                if keypress.type == pygame.KEYDOWN:
-                    if keypress.key == pygame.K_ESCAPE:
-                        if self.scoreCheck == True:
-                            self.end_text()
-                        if self.scoreCheck == False:
-                            self.initial_text()
                 if keypress.type == pygame.QUIT:
                     self.close_program()
-        
+                    return
+                if keypress.type == pygame.KEYDOWN and keypress.key == pygame.K_ESCAPE:
+                    if self.scoreCheck:
+                        self.end_text()
+                    else:
+                        self.initial_text()
+
             pygame.display.flip()
             self.timer.tick(60)
 
@@ -405,9 +400,9 @@ class CutleryHunt:
             
             for keypress in pygame.event.get():
                 if keypress.type == pygame.KEYDOWN:
-                    if keypress.key == pygame.K_F2:
+                    if keypress.key == pygame.K_RETURN:
                         self.cycle()
-                    if keypress.key == pygame.K_F3:
+                    if keypress.key == pygame.K_LSHIFT:
                         self.show_stats()
                     if keypress.key == pygame.K_ESCAPE:
                         self.close_program()
@@ -417,9 +412,10 @@ class CutleryHunt:
             pygame.display.flip()
             self.timer.tick(60)
     
-    def close_program(self): #Exit progam and closes the SQL database.
+    def close_program(self):
         self.db.close()
-        exit()
+        pygame.quit()
+        sys.exit()
     
 if __name__ == "__main__":
     CutleryHunt()
