@@ -1,7 +1,8 @@
-import pygame
 import sys
 import sqlite3
 from random import randint
+
+import pygame
 
 class CutleryHunt:
 
@@ -9,21 +10,24 @@ class CutleryHunt:
         pygame.init()
         pygame.mixer.init()
         pygame.display.set_caption("The Great Cutlery Hunt of Horrible Horrors")
-        
         self.download_pics()
         self.download_voices()
         self.create_database()
-        self.initialize_game()
+        self.screen = pygame.display.set_mode((940, 780))
+        self.font1 = pygame.font.SysFont("Arial", 24)
+        self.font2 = pygame.font.SysFont("Arial", 30, bold=True)
+        self.font3 = pygame.font.SysFont("Arial", 40)
+        self.timer = pygame.time.Clock()
         self.initial_text()
 
     def download_pics(self): #Downloads pictures used in game
-        self.forkPic = pygame.image.load("fork.png")
-        self.knifePic = pygame.image.load("knife.png")
-        self.knightPic = pygame.image.load("knight.png")
-        self.skeletonPic = pygame.image.load("skeleton.png")
-        self.spoonPic = pygame.image.load("spoon.png")
-        self.wallPic = pygame.image.load("wall.png")
-    
+        self.fork_pic = pygame.image.load("fork.png")
+        self.knife_pic = pygame.image.load("knife.png")
+        self.knight_pic = pygame.image.load("knight.png")
+        self.skeleton_pic = pygame.image.load("skeleton.png")
+        self.spoon_pic = pygame.image.load("spoon.png")
+        self.wall_pic = pygame.image.load("wall.png")
+
     def download_voices(self):
         self.sounds = {
             "beep": pygame.mixer.Sound("beep.wav"),
@@ -33,70 +37,75 @@ class CutleryHunt:
 
     def play_sound(self, voice_name):
         self.sounds[voice_name].play()
-    
+
     def create_database(self): #Creates SQL database.
         self.db = sqlite3.connect("scoreBase.db")
         self.db.isolation_level = None
 
         try:
-            self.db.execute("CREATE TABLE Records (id INTEGER PRIMARY KEY, score INTEGER UNIQUE, time INTEGER)")
-        except:
-            pass
+            self.db.execute("CREATE TABLE Records "
+                "(id INTEGER PRIMARY KEY, score INTEGER UNIQUE, time INTEGER)")
+        except sqlite3.OperationalError as e:
+            if "already exists" in str(e):
+                print("Table already exists.")
+            else:
+                print(f"Virhe: {e}")
 
     def draw_screen(self):
         self.screen.fill((80, 0, 0))
 
         for ii in range(0, 55 * 17, 55):
-            self.screen.blit(self.wallPic, (ii, 0))
-            self.screen.blit(self.wallPic, (ii, 720))
+            self.screen.blit(self.wall_pic, (ii, 0))
+            self.screen.blit(self.wall_pic, (ii, 720))
 
-    
     def clock(self): #Displays the timer of main game.
-        currentTime = f"TIME {self.clockTime[0]:02}:{self.clockTime[1]:02}:{self.clockTime[2]:02}"
-        self.clockTime[3] += 1
+        current_time = (
+        f"TIME {self.clock_time[0]:02}:"
+        f"{self.clock_time[1]:02}:"
+        f"{self.clock_time[2]:02}"
+)
+        self.clock_time[3] += 1
 
-        if self.clockTime[3] == 60:
-            self.clockTime[3] = 0
-            self.clockTime[2] += 1
-        if self.clockTime[2] == 60:
-            self.clockTime[2] = 0
-            self.clockTime[1] += 1
-        if self.clockTime[1] == 60:
-            self.clockTime[1] = 0
-            self.clockTime[0] += 1
-        
-        endText1 = self.font2.render(currentTime, True, (0, 0, 0))
-        temp_surface = pygame.Surface(endText1.get_size())
+        if self.clock_time[3] == 60:
+            self.clock_time[3] = 0
+            self.clock_time[2] += 1
+        if self.clock_time[2] == 60:
+            self.clock_time[2] = 0
+            self.clock_time[1] += 1
+        if self.clock_time[1] == 60:
+            self.clock_time[1] = 0
+            self.clock_time[0] += 1
+
+        end_text1 = self.font2.render(current_time, True, (0, 0, 0))
+        temp_surface = pygame.Surface(end_text1.get_size())
         temp_surface.fill((192, 192, 192))
-        temp_surface.blit(endText1, (0, 0))
+        temp_surface.blit(end_text1, (0, 0))
         self.screen.blit(temp_surface, temp_surface.get_rect(center=(335, 28)))
+        self.end_time = current_time[4:13]
 
-        self.endTime = currentTime[4:13]
-    
     def show_stats(self): #Show game score statistics.
-        stats = self.db.execute("SELECT ROW_NUMBER() OVER (ORDER by score DESC, time), score, time FROM Records").fetchall()
-        statsText = ["              TOP SCORES","","Rank         Points          Time"]
+        stats = self.db.execute("SELECT ROW_NUMBER() OVER "
+            "(ORDER by score DESC, time), score, time FROM Records").fetchall()
+        stats_text = ["              TOP SCORES","","Rank         Points          Time"]
         for row in stats:
-            rowConstant = ""
+            row_constant = ""
             for _ in range(10-len(str(row[1]))):
-                rowConstant += ".."
-            statsText.append(str(f"{row[0]} ...............{row[1]}{rowConstant}{row[2]}"))
-        statsText.append(" ")
-        statsText.append("        ESC =  Return Menu")
- 
+                row_constant += ".."
+            stats_text.append(str(f"{row[0]} ...............{row[1]}{row_constant}{row[2]}"))
+        stats_text.append(" ")
+        stats_text.append("        ESC =  Return Menu")
+
         while True:
             self.draw_screen()
-
-            for i, text in enumerate(statsText):
-                introText1 = self.font2.render(text, True, (255, 0, 0))
-                self.screen.blit(introText1, (255, 130 + i * 50))
+            for i, text in enumerate(stats_text):
+                intro_text1 = self.font2.render(text, True, (255, 0, 0))
+                self.screen.blit(intro_text1, (255, 130 + i * 50))
 
             for keypress in pygame.event.get():
                 if keypress.type == pygame.QUIT:
                     self.close_program()
-                    return
                 if keypress.type == pygame.KEYDOWN and keypress.key == pygame.K_ESCAPE:
-                    if self.scoreCheck:
+                    if self.score_check:
                         self.end_text()
                     else:
                         self.initial_text()
@@ -108,93 +117,89 @@ class CutleryHunt:
         self.initialize_game()
         self.countdown()
         self.maingame()
-    
-    def initialize_game(self): #Initialize all essential variables of game.
-        self.screen = pygame.display.set_mode((940, 780))
-        self.font1 = pygame.font.SysFont("Arial", 24)
-        self.font2 = pygame.font.SysFont("Arial", 30, bold=True)       
-        self.font3 = pygame.font.SysFont("Arial", 40)
-        self.points = 0
-        self.clockTime =[0, 0, 0, 0]
-        self.scoreCheck = False
-        self.endTime = ""
 
-        self.xKnight = 445
-        self.yKnight = 500-self.knightPic.get_height()
-        self.knightLeft = 445
-        self.knightRight = 495
-        self.knightDown = 460
-        self.knightUp = 460 - 85
+    def initialize_game(self): #Initialize all essential variables of game.
+
+        self.points = 0
+        self.clock_time =[0, 0, 0, 0]
+        self.score_check = False
+        self.end_time = ""
+
+        self.x_knight = 445
+        self.y_knight = 500-self.knight_pic.get_height()
+        self.knight_left = 445
+        self.knight_right = 495
+        self.knight_down = 460
+        self.knight_up = 460 - 85
 
         self.skeletons1 = []
         self.skeletons2 = []
-        
-        self.xFork = randint(40, 860)
-        self.yFork = randint(80, 660)
+        self.x_fork = randint(40, 860)
+        self.y_fork = randint(80, 660)
 
-        self.xKnife = randint(1000, 1000)
-        self.yKnife = randint(80, 660)
-        self.knifeLine = randint(15, 25)
-        self.knifeRepeat = True
+        self.x_knife = randint(1000, 1000)
+        self.y_knife = randint(80, 660)
+        self.knife_line = randint(15, 25)
+        self.knife_repeat = True
 
-        self.xSpoon = randint(1000, 1000)
-        self.ySpoon = randint(80, 660)
-        self.spoonLine = randint(40, 55)
-        self.spoonRepeat = True
-            
-        self.arrowRight = False
-        self.arrowLeft = False
-        self.arrowUp = False
-        self.arrowDown = False
-            
-        self.timer = pygame.time.Clock()
+        self.x_spoon = randint(1000, 1000)
+        self.y_spoon = randint(80, 660)
+        self.spoon_line = randint(40, 55)
+        self.spoon_repeat = True
+        self.arrow_right = False
+        self.arrow_left = False
+        self.arrow_up = False
+        self.arrow_down = False
 
     def initial_text(self): #Displays the introduction texts of game.
         while True:
             self.draw_screen()
-            introText1 = self.font3.render("The Great Cutlery Hunt of Horrible Horrors", True, (255, 0, 0))
-            self.screen.blit(introText1, introText1.get_rect(center=(470, 220))) 
-            introText2 = ["In this game you face horrible horrors while hunting precious silver cutleries.",
-            "Use arrowkeys to gahter cutleries with knight while avoiding horrible horrors.",
+            intro_text1 = self.font3.render(
+                "The Great Cutlery Hunt of Horrible Horrors", True, (255, 0, 0))
+            self.screen.blit(intro_text1, intro_text1.get_rect(center=(470, 220)))
+            intro_text2 = ["In this game you face horrible horrors "
+            "while hunting precious silver cutleries.",
+            "Use arrowkeys to gahter cutleries with knight "
+            "while avoiding horrible horrors. "
             "Game ends when horrible horror reaches you."]
 
-            tableCount = self.db.execute("SELECT COUNT(score) FROM Records").fetchone()[0]
-            if tableCount > 0:
-                introText3 = "F2 = New game   F3 = Show Top Scores"
+            table_count = self.db.execute("SELECT COUNT(score) FROM Records").fetchone()[0]
+            if table_count > 0:
+                intro_text3 = "Enter = New game   L-Shift = Show Top Scores   ESC = Exit"
             else:
-                introText3 = "F2 = New game"
+                intro_text3 = "Enter = New game"
 
             i = 0
             ii = 320
-            while i < len(introText2):
-                introPlat1 = self.font1.render(introText2[i], True, (255, 0, 0))
-                self.screen.blit(introPlat1, introPlat1.get_rect(center=(470, ii)))
-                introPlat2 = self.font2.render(introText3, True, (255, 0, 0))
-                self.screen.blit(introPlat2, introPlat2.get_rect(center=(470, 510)))
+            while i < len(intro_text2):
+                intro_plat1 = self.font1.render(intro_text2[i], True, (255, 0, 0))
+                self.screen.blit(intro_plat1, intro_plat1.get_rect(center=(470, ii)))
+                intro_plat2 = self.font2.render(intro_text3, True, (255, 0, 0))
+                self.screen.blit(intro_plat2, intro_plat2.get_rect(center=(470, 510)))
                 i += 1
                 ii += 50
-                
+
             i = 0
             ii = 420
             while i < 3:
-                self.screen.blit(self.forkPic, self.forkPic.get_rect(center=(ii, 610)))
-                self.screen.blit(self.skeletonPic, self.skeletonPic.get_rect(center=(370, 610)))
-                self.screen.blit(self.skeletonPic, self.skeletonPic.get_rect(center=(570, 610,)))
+                self.screen.blit(self.fork_pic, self.fork_pic.get_rect(center=(ii, 610)))
+                self.screen.blit(self.skeleton_pic, self.skeleton_pic.get_rect(center=(370, 610)))
+                self.screen.blit(self.skeleton_pic, self.skeleton_pic.get_rect(center=(570, 610,)))
                 i += 1
                 ii += 50
 
             for keypress in pygame.event.get():
                 if keypress.type == pygame.KEYDOWN:
-                    if keypress.key == pygame.K_F2:
+                    if keypress.key == pygame.K_RETURN:
                         self.cycle()
-                    if tableCount > 0:
-                        if keypress.key == pygame.K_F3:
+                    if table_count > 0:
+                        if keypress.key == pygame.K_LSHIFT:
                             self.show_stats()
                     if keypress.key == pygame.K_ESCAPE:
                         self.close_program()
                 if keypress.type == pygame.QUIT:
                     self.close_program()
-            
+
             pygame.display.flip()
             self.timer.tick(60)
 
@@ -206,135 +211,136 @@ class CutleryHunt:
             if self.count <= 4:
                 self.play_sound("beep")
 
-            endText1 = self.font2.render("POINTS " + str(self.points), True, (0, 0, 0))
-            temp_surface = pygame.Surface(endText1.get_size())
+            end_text1 = self.font2.render("POINTS " + str(self.points), True, (0, 0, 0))
+            temp_surface = pygame.Surface(end_text1.get_size())
             temp_surface.fill((192, 192, 192))
-            temp_surface.blit(endText1, (0, 0))
+            temp_surface.blit(end_text1, (0, 0))
             self.screen.blit(temp_surface, temp_surface.get_rect(center=(117, 28)))
 
-            endText1 = self.font3.render("Game starts in " + str(self.count), True, (255, 0, 0))
-            self.screen.blit(endText1, endText1.get_rect(center=(470, 370)))
-            self.screen.blit(self.knightPic, (self.xKnight, self.yKnight))
+            end_text1 = self.font3.render("Game starts in " + str(self.count), True, (255, 0, 0))
+            self.screen.blit(end_text1, end_text1.get_rect(center=(470, 370)))
+            self.screen.blit(self.knight_pic, (self.x_knight, self.y_knight))
 
-            self.count -= 1
- 
+            self.count-=1
+
             pygame.display.flip()
             self.timer.tick(1)
-            
+
     def maingame(self): #Starts the game.
         while True:
             self.draw_screen()
             self.clock()
 
-            pointText = self.font2.render("POINTS " + str(self.points), True, (0, 0, 0))
-            temp_surface1 = pygame.Surface(pointText.get_size())
+            point_text = self.font2.render("POINTS " + str(self.points), True, (0, 0, 0))
+            temp_surface1 = pygame.Surface(point_text.get_size())
             temp_surface1.fill((192, 192, 192))
-            temp_surface1.blit(pointText, (0, 0))
+            temp_surface1.blit(point_text, (0, 0))
             self.screen.blit(temp_surface1, temp_surface1.get_rect(center=(117, 28)))
 
-            self.screen.blit(self.knightPic, (self.xKnight, self.yKnight))
-            self.screen.blit(self.forkPic, (self.xFork, self.yFork))
-            self.screen.blit(self.knifePic, (self.xKnife, self.yKnife))
-            self.screen.blit(self.spoonPic, (self.xSpoon, self.ySpoon))
+            self.screen.blit(self.knight_pic, (self.x_knight, self.y_knight))
+            self.screen.blit(self.fork_pic, (self.x_fork, self.y_fork))
+            self.screen.blit(self.knife_pic, (self.x_knife, self.y_knife))
+            self.screen.blit(self.spoon_pic, (self.x_spoon, self.y_spoon))
 
 
             for keypress in pygame.event.get():
                 if keypress.type == pygame.KEYDOWN:
                     if keypress.key == pygame.K_LEFT:
-                        self.arrowLeft = True
+                        self.arrow_left = True
                     if keypress.key == pygame.K_RIGHT:
-                        self.arrowRight = True
+                        self.arrow_right = True
 
                 if keypress.type == pygame.KEYUP:
                     if keypress.key == pygame.K_LEFT:
-                        self.arrowLeft = False
+                        self.arrow_left = False
                     if keypress.key == pygame.K_RIGHT:
-                        self.arrowRight = False
-                
+                        self.arrow_right = False
+
                 if keypress.type == pygame.KEYDOWN:
                     if keypress.key == pygame.K_UP:
-                        self.arrowUp = True
+                        self.arrow_up = True
                     if keypress.key == pygame.K_DOWN:
-                        self.arrowDown = True
-                
+                        self.arrow_down = True
+
                 if keypress.type == pygame.KEYUP:
                     if keypress.key == pygame.K_UP:
-                        self.arrowUp = False
+                        self.arrow_up = False
                     if keypress.key == pygame.K_DOWN:
-                        self.arrowDown = False
-            
+                        self.arrow_down = False
+
                 if keypress.type == pygame.QUIT:
                     self.close_program()
 
-        
-            if self.arrowRight and self.xKnight < 890:
-                self.xKnight += 5
-                self.knightLeft += 5
-                self.knightRight += 5
+            if self.arrow_right and self.x_knight < 890:
+                self.x_knight += 5
+                self.knight_left += 5
+                self.knight_right += 5
 
-            if self.arrowLeft and self.xKnight > 0:
-                self.xKnight -= 5
-                self.knightLeft -= 5
-                self.knightRight -= 5
+            if self.arrow_left and self.x_knight > 0:
+                self.x_knight -= 5
+                self.knight_left -= 5
+                self.knight_right -= 5
 
-            if self.arrowUp and self.yKnight > 60:
-                self.yKnight -= 5
-                self.knightDown -= 5
-                self.knightUp -= 5
+            if self.arrow_up and self.y_knight > 60:
+                self.y_knight -= 5
+                self.knight_down -= 5
+                self.knight_up -= 5
 
-            if self.arrowDown and self.yKnight < 640:
-                self.yKnight += 5
-                self.knightDown += 5
-                self.knightUp += 5
+            if self.arrow_down and self.y_knight < 640:
+                self.y_knight += 5
+                self.knight_down += 5
+                self.knight_up += 5
 
-
-            if self.xFork >= self.knightLeft and self.xFork <= self.knightRight and self.knightDown >= self.yFork and self.knightUp <= self.yFork:
-                self.xFork = randint(40, 860)
-                self.yFork = randint(80, 660)
+            if self.x_fork >= self.knight_left and self.x_fork <= self.knight_right \
+            and self.knight_down >= self.y_fork and self.knight_up <= self.y_fork:
+                self.x_fork = randint(40, 860)
+                self.y_fork = randint(80, 660)
                 self.points += 1
                 self.play_sound("wump")
 
-            if self.xKnife >= self.knightLeft and self.xKnife <= self.knightRight and self.knightDown >= self.yKnife and self.knightUp <= self.yKnife:
-                self.xKnife = randint(1000, 1000)
-                self.yKnife = randint(1000, 1000)
-                self.knifeLine = self.knifeLine + randint(10, 25)
+            if self.x_knife >= self.knight_left and self.x_knife <= self.knight_right \
+            and self.knight_down >= self.y_knife and self.knight_up <= self.y_knife:
+                self.x_knife = randint(1000, 1000)
+                self.y_knife = randint(1000, 1000)
+                self.knife_line = self.knife_line + randint(10, 25)
                 self.points += 1
                 self.play_sound("wump")
-                self.knifeRepeat = True
+                self.knife_repeat = True
 
-            if self.points == self.knifeLine and self.knifeRepeat == True:
-                self.xKnife = randint(40, 860)
-                self.yKnife = randint(80, 660)
-                self.knifeRepeat = False
+            if self.points == self.knife_line and self.knife_repeat is True:
+                self.x_knife = randint(40, 860)
+                self.y_knife = randint(80, 660)
+                self.knife_repeat = False
 
-            if self.xSpoon >= self.knightLeft and self.xSpoon <= self.knightRight and self.knightDown >= self.ySpoon and self.knightUp <= self.ySpoon:
-                self.xSpoon = randint(1000, 1000)
-                self.ySpoon = randint(1000, 1000)
-                self.spoonLine = self.spoonLine + randint(40, 55)
+            if self.x_spoon >= self.knight_left and self.x_spoon <= self.knight_right \
+            and self.knight_down >= self.y_spoon and self.knight_up <= self.y_spoon:
+                self.x_spoon = randint(1000, 1000)
+                self.y_spoon = randint(1000, 1000)
+                self.spoon_line = self.spoon_line + randint(40, 55)
                 self.points += 1
                 self.play_sound("wump")
 
-            if self.points == self.spoonLine and self.spoonRepeat == True:
-                self.xSpoon = randint(40, 860)
-                self.ySpoon = randint(80, 660)
-                self.spoonRepeat = False
-
+            if self.points == self.spoon_line and self.spoon_repeat is True:
+                self.x_spoon = randint(40, 860)
+                self.y_spoon = randint(80, 660)
+                self.spoon_repeat = False
 
             for _ in range(5):
                 x = randint(-1500, -100)
                 y = randint(60, 650)
                 self.skeletons1.append((x, y))
-            
+
             for _ in range(5):
                 x1 = randint(1000, 2400)
                 y1 = randint(60, 650)
-                self.skeletons2.append((x1, y1)) 
-            
+                self.skeletons2.append((x1, y1))
+
             for i in range(5):
                 x, y = self.skeletons1[i]
                 if x < 1000:
                     x += 5
-                if y <= self.knightDown and y >= self.knightUp and x >= self.knightLeft and x <= self.knightRight:
+                if self.knight_up <= y <= self.knight_down and \
+                    self.knight_left <= x <= self.knight_right:
                     self.play_sound("crush")
                     pygame.time.wait(1200)
                     self.end_text()
@@ -342,12 +348,13 @@ class CutleryHunt:
                     x = randint(-1500, -100)
                     y = randint(60, 650)
                 self.skeletons1[i] = (x, y)
-                self.screen.blit(self.skeletonPic, (x, y))
-            
+                self.screen.blit(self.skeleton_pic, (x, y))
+
             for i in range(5):
                 x1, y1 = self.skeletons2[i]
                 x1 -= 5
-                if y1 <= self.knightDown and y1 >= self.knightUp and x1 >= self.knightLeft and x1 <= self.knightRight:
+                if self.knight_up <= y1 <= self.knight_down \
+                    and self.knight_left <= x1 <= self.knight_right:
                     self.play_sound("crush")
                     pygame.time.wait(1200)
                     self.end_text()
@@ -355,49 +362,64 @@ class CutleryHunt:
                     x1 = randint(1000, 2400)
                     y1 = randint(60, 650)
                 self.skeletons2[i] = (x1, y1)
-                self.screen.blit(self.skeletonPic, (x1, y1))
-            
+                self.screen.blit(self.skeleton_pic, (x1, y1))
+
             pygame.display.flip()
             self.timer.tick(60)
-    
-    def end_text(self): #Displays the player's score, game time and gives player a possibility to start the game again or close program.
-        self.scoreCheck = True
-        tableCount = self.db.execute("SELECT COUNT(score) FROM Records").fetchone()[0]
+
+    def end_text(self): #Displays the player's score, game time
+        # and gives player a possibility to start the game again or close program.
+        self.score_check = True
+        table_count = self.db.execute("SELECT COUNT(score) FROM Records").fetchone()[0]
         try:
-            if tableCount > 0:
-                lastScore = self.db.execute("SELECT score FROM Records ORDER BY score LIMIT 1").fetchone()[0]
-                lastTime = self.db.execute("SELECT time FROM Records ORDER BY score LIMIT 1").fetchone()[0]
-            if tableCount < 5:
-                    self.db.execute("INSERT INTO Records (score, time) VALUES (?, ?)", [self.points, self.endTime])
-            elif tableCount == 5 and lastScore < self.points:
-                self.db.execute("DELETE FROM Records WHERE score=? AND time=?", [lastScore, lastTime ])
-                self.db.execute("INSERT INTO Records (score, time) VALUES (?, ?)", [self.points, self.endTime])
-        except:
-            pass
+            if table_count > 0:
+                last_score = self.db.execute(
+                    "SELECT score FROM Records ORDER BY score LIMIT 1").fetchone()[0]
+                last_time = self.db.execute(
+                    "SELECT time FROM Records ORDER BY score LIMIT 1").fetchone()[0]
+            if table_count < 5:
+                self.db.execute(
+                        "INSERT INTO Records (score, time) VALUES (?, ?)",
+                        [self.points, self.end_time])
+            elif table_count == 5 and last_score < self.points:
+                self.db.execute(
+                    "DELETE FROM Records WHERE score=? AND time=?",
+                    [last_score, last_time ])
+                self.db.execute(
+                    "INSERT INTO Records (score, time) VALUES (?, ?)",
+                    [self.points, self.end_time])
+
+        except sqlite3.OperationalError as e:
+            if "Table error" in str(e):
+                print("Table error.")
+            else:
+                print(f"Virhe: {e}")
 
         while True:
             self.draw_screen()
 
             if self.points == 1:
-                pointsAnc = " point in"
+                points_anc = " point in"
             else:
-                pointsAnc = " points in"
+                points_anc = " points in"
 
-            endText1 = self.font3.render("GAME OVER ", True, (255, 0, 0))
-            endText2 = self.font3.render("You got " + str(self.points) + pointsAnc + str(self.endTime), True, (255, 0, 0))   
-            endText3 = self.font2.render("F2 = New game   F3 = Show Top Scores   ESC = Exit", True, (255, 0, 0))
-            self.screen.blit(endText1, endText1.get_rect(center=(470, 290)))
-            self.screen.blit(endText2, endText2.get_rect(center=(470, 370)))
-            self.screen.blit(endText3, endText3.get_rect(center=(470, 560)))
+            end_text1 = self.font3.render("GAME OVER ", True, (255, 0, 0))
+            end_text2 = self.font3.render(
+                "You got " + str(self.points) + points_anc + str(self.end_time), True, (255, 0, 0))
+            end_text3 = self.font2.render(
+                "Enter = New game   L-Shift = Show Top Scores   ESC = Exit", True, (255, 0, 0))
+            self.screen.blit(end_text1, end_text1.get_rect(center=(470, 290)))
+            self.screen.blit(end_text2, end_text2.get_rect(center=(470, 370)))
+            self.screen.blit(end_text3, end_text3.get_rect(center=(470, 560)))
 
             i = 0
             ii = 420
             while i < 3:
-                self.screen.blit(self.skeletonPic, self.skeletonPic.get_rect(center=(ii, 200)))
-                self.screen.blit(self.skeletonPic, self.skeletonPic.get_rect(center=(ii, 450)))
+                self.screen.blit(self.skeleton_pic, self.skeleton_pic.get_rect(center=(ii, 200)))
+                self.screen.blit(self.skeleton_pic, self.skeleton_pic.get_rect(center=(ii, 450)))
                 i += 1
                 ii += 50
-            
+
             for keypress in pygame.event.get():
                 if keypress.type == pygame.KEYDOWN:
                     if keypress.key == pygame.K_RETURN:
@@ -408,14 +430,14 @@ class CutleryHunt:
                         self.close_program()
                 if keypress.type == pygame.QUIT:
                     self.close_program()
-            
+
             pygame.display.flip()
             self.timer.tick(60)
-    
+
     def close_program(self):
         self.db.close()
         pygame.quit()
         sys.exit()
-    
+
 if __name__ == "__main__":
     CutleryHunt()

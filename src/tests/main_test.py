@@ -1,6 +1,10 @@
+
 import unittest
 import pygame
+import sys
+import os
 from main import CutleryHunt
+
 
 class TestCutleryHunt(unittest.TestCase):
 

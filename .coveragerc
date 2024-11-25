@@ -1,0 +1,18 @@
+[run]
+# Hakemisto, josta koodi, jota halutaan testata, löytyy
+source = src/tests
+pythonpath = src
+
+[report]
+# Poissuljettavat tiedostot ja koodiosiot
+omit =
+    */tests/*
+
+# Poissuljettavat rivit (esimerkiksi pragma: no cover -kommentit)
+exclude_lines =
+    # Älä huomioi seuraavia rivejä:
+    pragma: no cover
+    # jos-lauseet, joita ei voi saavuttaa
+    if __name__ == "__main__":
+    if DEBUG:
+
