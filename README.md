@@ -23,4 +23,4 @@ Ennen pelialueelle siirtymistä pelaaja voi valita käyttäjänimen. Käyttäjä
 
 [Vaatimusäärittely](/dokumentaatio/vaatimusmaarittely.md)
 
-[Pakkauskaavio](/dokumentaatio/vaatimusmaarittely.md)
+[Pakkauskaavio](/dokumentaatio/arkkitehtuuri.md)
