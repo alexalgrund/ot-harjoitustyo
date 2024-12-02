@@ -33,6 +33,7 @@ class CutleryHunt:
             "beep": pygame.mixer.Sound("beep.wav"),
             "crush": pygame.mixer.Sound("crush.wav"),
             "wump": pygame.mixer.Sound("wump.wav"),
+            "surprise": pygame.mixer.Sound("surprise.wav")
         }
 
     def play_sound(self, voice_name):
@@ -124,6 +125,11 @@ class CutleryHunt:
         self.clock_time =[0, 0, 0, 0]
         self.score_check = False
         self.end_time = ""
+        self.record_start_time = None
+        self.difficulty_level = 1
+        self.loop_speed = 60
+        self.points_limit = 50
+        self.sound_played = False
 
         self.x_knight = 445
         self.y_knight = 500-self.knight_pic.get_height()
@@ -160,7 +166,7 @@ class CutleryHunt:
             intro_text2 = ["In this game you face horrible horrors "
             "while hunting precious silver cutleries.",
             "Use arrowkeys to gahter cutleries with knight "
-            "while avoiding horrible horrors. "
+            "while avoiding horrible horrors. ",
             "Game ends when horrible horror reaches you."]
 
             table_count = self.db.execute("SELECT COUNT(score) FROM Records").fetchone()[0]
@@ -237,11 +243,24 @@ class CutleryHunt:
             temp_surface1.blit(point_text, (0, 0))
             self.screen.blit(temp_surface1, temp_surface1.get_rect(center=(117, 28)))
 
+            if self.points == self.points_limit:
+                self.difficulty_level += 1
+                self.loop_speed += 10
+                self.points_limit += 50
+                if self.record_start_time is None:
+                    self.record_start_time = pygame.time.get_ticks()
+            if self.record_start_time and pygame.time.get_ticks() - self.record_start_time <= 3000:
+                self.play_sound("surprise")
+                new_level_text = self.font2.render(f"LEVEL {self.difficulty_level}", True, (0, 0, 0))
+                new_level_rect = new_level_text.get_rect(center=(self.screen.get_width() // 2, self.screen.get_height() // 2))
+                self.screen.blit(new_level_text, new_level_rect)
+            if self.record_start_time and pygame.time.get_ticks() - self.record_start_time > 3000:
+                self.record_start_time = None
+
             self.screen.blit(self.knight_pic, (self.x_knight, self.y_knight))
             self.screen.blit(self.fork_pic, (self.x_fork, self.y_fork))
             self.screen.blit(self.knife_pic, (self.x_knife, self.y_knife))
             self.screen.blit(self.spoon_pic, (self.x_spoon, self.y_spoon))
-
 
             for keypress in pygame.event.get():
                 if keypress.type == pygame.KEYDOWN:
@@ -365,7 +384,7 @@ class CutleryHunt:
                 self.screen.blit(self.skeleton_pic, (x1, y1))
 
             pygame.display.flip()
-            self.timer.tick(60)
+            self.timer.tick(self.loop_speed)
 
     def end_text(self): #Displays the player's score, game time
         # and gives player a possibility to start the game again or close program.
@@ -403,14 +422,21 @@ class CutleryHunt:
             else:
                 points_anc = " points in"
 
-            end_text1 = self.font3.render("GAME OVER ", True, (255, 0, 0))
-            end_text2 = self.font3.render(
-                "You got " + str(self.points) + points_anc + str(self.end_time), True, (255, 0, 0))
-            end_text3 = self.font2.render(
-                "Enter = New game   L-Shift = Show Top Scores   ESC = Exit", True, (255, 0, 0))
+            if self.points == self.db.execute("SELECT MAX(score) FROM Records").fetchone()[0]:
+                new_record_text = self.font3.render("NEW RECORD", True, (255, 0, 0))
+                self.screen.blit(new_record_text, new_record_text.get_rect(center=(470, 120)))
+                if self.sound_played is False:
+                    self.play_sound("surprise")
+                    self.sound_played = True
+
+            end_text1 = self.font3.render("GAME OVER", True, (255, 0, 0))
+            end_text2 = self.font3.render("You got " + str(self.points) + points_anc + str(self.end_time), True, (255, 0, 0))
+            end_text3 = self.font2.render("Enter = New game   L-Shift = Show Top Scores   ESC = Exit", True, (255, 0, 0))
+
             self.screen.blit(end_text1, end_text1.get_rect(center=(470, 290)))
             self.screen.blit(end_text2, end_text2.get_rect(center=(470, 370)))
             self.screen.blit(end_text3, end_text3.get_rect(center=(470, 560)))
+
 
             i = 0
             ii = 420
