@@ -33,7 +33,7 @@ Ei erityisiä suunnitelmia toistaiseksi. | HYLÄTTY -> Päällekkäinen edellise
 
 ## Jatkokehitysideoita
 
-- Pelin vaikeustaosojen nousu. | TOTEUTETTU -> Pelin vaikeutaso nousee ainakin 50 pisteen saavuttamisen jälkeen siten, että silmukan suoritusnopeus kasvaa 10 yksiköllä. Toisin sanoen peli nopeutuu vaikeustason kasvaessa.
+- Pelin vaikeustaosojen nousu. | TOTEUTETTU -> Pelin vaikeutaso nousee aina 50 pisteen saavuttamisen jälkeen siten, että silmukan suoritusnopeus kasvaa 10 yksiköllä. Toisin sanoen peli nopeutuu vaikeustason kasvaessa.
 - Grafiikan dynaamiset ominaisuudet (jos aikaa). | HYLÄTTY -> Liian vaikea toteuttaa annettuissa aikaraameissa.
 - Mahdollisuus valita hahmo. | HYLÄTTY -> Ei tuo peliin lisää uusia mielekiintoisia elementtejä.
 - Pelaaja saa ilmoituksen, jos saavuttaa pelissä uuden piste-ennätyksen. | TOTEUTETTU -> Pelin päättyessä pelin loppupistenäyttöön ilmestyy teksti "NEW RECORD", jos uusi ennätys saavutetaan.
