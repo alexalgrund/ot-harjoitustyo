@@ -28,4 +28,5 @@ Ennen pelialueelle siirtymistä pelaaja voi valita käyttäjänimen. Käyttäjä
 [Vaatimusäärittely](/dokumentaatio/vaatimusmaarittely.md)
 
 [Pakkauskaavio](/dokumentaatio/arkkitehtuuri.md)
+
 [Release-julkaisu](/https://github.com/alexalgrund/ot-harjoitustyo/releases/tag/viikko5)
