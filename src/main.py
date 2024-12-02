@@ -1,4 +1,5 @@
 import sys
+import os
 import sqlite3
 from random import randint
 
@@ -20,21 +21,24 @@ class CutleryHunt:
         self.timer = pygame.time.Clock()
         self.initial_text()
 
-    def download_pics(self): #Downloads pictures used in game
-        self.fork_pic = pygame.image.load("fork.png")
-        self.knife_pic = pygame.image.load("knife.png")
-        self.knight_pic = pygame.image.load("knight.png")
-        self.skeleton_pic = pygame.image.load("skeleton.png")
-        self.spoon_pic = pygame.image.load("spoon.png")
-        self.wall_pic = pygame.image.load("wall.png")
+    def download_pics(self):
+        images_path = os.path.join(os.path.dirname(__file__), "images")
+        self.fork_pic = pygame.image.load(os.path.join(images_path, "fork.png"))
+        self.knife_pic = pygame.image.load(os.path.join(images_path, "knife.png"))
+        self.knight_pic = pygame.image.load(os.path.join(images_path, "knight.png"))
+        self.skeleton_pic = pygame.image.load(os.path.join(images_path, "skeleton.png"))
+        self.spoon_pic = pygame.image.load(os.path.join(images_path, "spoon.png"))
+        self.wall_pic = pygame.image.load(os.path.join(images_path, "wall.png"))
+
 
     def download_voices(self):
+        sounds_path = os.path.join(os.path.dirname(__file__), "sounds")
         self.sounds = {
-            "beep": pygame.mixer.Sound("beep.wav"),
-            "crush": pygame.mixer.Sound("crush.wav"),
-            "wump": pygame.mixer.Sound("wump.wav"),
-            "surprise": pygame.mixer.Sound("surprise.wav")
-        }
+            "beep": pygame.mixer.Sound(os.path.join(sounds_path, "beep.wav")),
+            "crush": pygame.mixer.Sound(os.path.join(sounds_path, "crush.wav")),
+            "wump": pygame.mixer.Sound(os.path.join(sounds_path, "wump.wav")),
+            "surprise": pygame.mixer.Sound(os.path.join(sounds_path, "surprise.wav"))
+    }
 
     def play_sound(self, voice_name):
         self.sounds[voice_name].play()
