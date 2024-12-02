@@ -21,3 +21,11 @@ Tästä ei kuitenkaan aiheudu pelin suorituksen kannalta ongelmaa, joten suljeta
 2. Peliin kuuluu mahdollisuus aloittaa uusi peli GAME OVERIN jälkeen, joten keskeisiä muuttujia ei kannata alustaa konstruktorissa, vaan
 niitä varten tarvitaan oma funktionsa, jota voidaan toisintaa. Pylint on tästä eri mieltä, joten suljetaan myös tapaukset E1101 ja E0606
 Pylint-testauksen ulkopuolelle. 
+
+## Viikko5
+- Lisättiin ohjelmaan ominaisuudet: vaikeustason nousu ja ilmoitus, kun pelaaja saavuttaa uuden piste-ennätyksen. Pelin vaikeustaso nousee 50 pisteen välein siten,
+että pääsilmukan suoritusnopeus kasvaa aina tällöin 10 yksiköllä.
+- Sijoitettiin pelin kuvat ja äänet omiin alihakemistoihinsa src-päähakemiston alle ja korjattiin koodia tämän muutoksen mukaiseksi.
+- Päädytään siihen, että pelin toiminnallisuus on nyt riittävä, eikä peliin enää lisätä sisällöllisesti uusia asioita. Seuraavat kaksi viikkoa
+käytetään järjestämällä nyt proseduraalisessa muodossa oleva koodi luokkiin, tekemällä tältä kannalta tarpeellinen refaktorointi ja kirjoittamalla pelille
+riittävän kattava testitiedosto.

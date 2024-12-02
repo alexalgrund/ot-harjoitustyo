@@ -30,7 +30,6 @@ class CutleryHunt:
         self.spoon_pic = pygame.image.load(os.path.join(images_path, "spoon.png"))
         self.wall_pic = pygame.image.load(os.path.join(images_path, "wall.png"))
 
-
     def download_voices(self):
         sounds_path = os.path.join(os.path.dirname(__file__), "sounds")
         self.sounds = {
@@ -255,8 +254,10 @@ class CutleryHunt:
                     self.record_start_time = pygame.time.get_ticks()
             if self.record_start_time and pygame.time.get_ticks() - self.record_start_time <= 3000:
                 self.play_sound("surprise")
-                new_level_text = self.font2.render(f"LEVEL {self.difficulty_level}", True, (0, 0, 0))
-                new_level_rect = new_level_text.get_rect(center=(self.screen.get_width() // 2, self.screen.get_height() // 2))
+                new_level_text = self.font2.render(f"LEVEL {self.difficulty_level}",
+                True, (0, 0, 0))
+                new_level_rect = new_level_text.get_rect(center=(self.screen.get_width()
+                 // 2, self.screen.get_height() // 2))
                 self.screen.blit(new_level_text, new_level_rect)
             if self.record_start_time and pygame.time.get_ticks() - self.record_start_time > 3000:
                 self.record_start_time = None
@@ -434,8 +435,10 @@ class CutleryHunt:
                     self.sound_played = True
 
             end_text1 = self.font3.render("GAME OVER", True, (255, 0, 0))
-            end_text2 = self.font3.render("You got " + str(self.points) + points_anc + str(self.end_time), True, (255, 0, 0))
-            end_text3 = self.font2.render("Enter = New game   L-Shift = Show Top Scores   ESC = Exit", True, (255, 0, 0))
+            end_text2 = self.font3.render("You got " +
+            str(self.points) + points_anc + str(self.end_time), True, (255, 0, 0))
+            end_text3 = self.font2.render
+            ("Enter = New game   L-Shift = Show Top Scores   ESC = Exit", True, (255, 0, 0))
 
             self.screen.blit(end_text1, end_text1.get_rect(center=(470, 290)))
             self.screen.blit(end_text2, end_text2.get_rect(center=(470, 370)))
