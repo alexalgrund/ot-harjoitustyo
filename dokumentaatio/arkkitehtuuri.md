@@ -34,12 +34,9 @@ classDiagram
         +close_program()
     }
 ```
-
-```mermaid
-
-
 Alla oleva sekvensikaavio kuvaa pelin päätoiminnallisuutta, siis funktiota maingame().
 
+```mermaid
 graph TD
     A[maingame] --> B[draw_screen]
     A --> C[clock]
