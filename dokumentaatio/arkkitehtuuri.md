@@ -37,6 +37,7 @@
 +------------------------+
 ```
 
+```mermaid
 
 graph TD
     A[maingame] --> B[draw_screen]
