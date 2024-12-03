@@ -437,8 +437,8 @@ class CutleryHunt:
             end_text1 = self.font3.render("GAME OVER", True, (255, 0, 0))
             end_text2 = self.font3.render("You got " +
             str(self.points) + points_anc + str(self.end_time), True, (255, 0, 0))
-            end_text3 = self.font2.render
-            ("Enter = New game   L-Shift = Show Top Scores   ESC = Exit", True, (255, 0, 0))
+            end_text3 = self.font2.render \
+                ("Enter = New game   L-Shift = Show Top Scores   ESC = Exit", True, (255, 0, 0))
 
             self.screen.blit(end_text1, end_text1.get_rect(center=(470, 290)))
             self.screen.blit(end_text2, end_text2.get_rect(center=(470, 370)))

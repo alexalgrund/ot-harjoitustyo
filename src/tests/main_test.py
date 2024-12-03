@@ -1,8 +1,8 @@
-
 import unittest
 import pygame
 import sys
 import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
 from main import CutleryHunt
 
 
@@ -21,7 +21,6 @@ class TestCutleryHunt(unittest.TestCase):
         self.assertIsNotNone(cutlery_hunt.wallPic)
 
     def test_download_voices(self):
-        self.assertIsNotNone(cutlery_hunt.sounds['beep'])
-        self.assertIsNotNone(cutlery_hunt.sounds['crush'])
-        self.assertIsNotNone(cutlery_hunt.sounds['wump'])
-
+        self.assertIsNotNone(self.kortti.sounds['beep'])
+        self.assertIsNotNone(self.kortti.sounds['crush'])
+        self.assertIsNotNone(self.kortti.sounds['wump'])
