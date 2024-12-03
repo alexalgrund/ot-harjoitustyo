@@ -29,3 +29,4 @@ että pääsilmukan suoritusnopeus kasvaa aina tällöin 10 yksiköllä.
 - Päädytään siihen, että pelin toiminnallisuus on nyt riittävä, eikä peliin enää lisätä sisällöllisesti uusia asioita. Seuraavat kaksi viikkoa
 käytetään järjestämällä nyt proseduraalisessa muodossa oleva koodi luokkiin, tekemällä tältä kannalta tarpeellinen refaktorointi ja kirjoittamalla pelille
 riittävän kattava testitiedosto.
+- Lisättiin myös sekvensikaavio kuvaamaan pelin pääluokkaa eli funktiota maingame().
