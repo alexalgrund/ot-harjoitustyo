@@ -10,7 +10,7 @@ Ohjelman testaus: **poetry run invoke test**
 
 Testikattavuusraportti: **poetry run invoke coverage-report**
 
-Pylint-tarkastu **poetry run invoke lint**
+Pylint-tarkastu: **poetry run invoke lint**
 
 ## Kuvaus
 
