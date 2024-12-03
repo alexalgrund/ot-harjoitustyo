@@ -33,6 +33,7 @@ classDiagram
         +end_text()
         +close_program()
     }
+```
 
 ```mermaid
 
