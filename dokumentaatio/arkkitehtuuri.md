@@ -38,7 +38,7 @@ classDiagram
 ```mermaid
 
 
-Alla oleva sekvensikaavio kuvaa pelin päätoiminnallisuutta, eli funktiota maingame().
+Alla oleva sekvensikaavio kuvaa pelin päätoiminnallisuutta, siis funktiota maingame().
 
 graph TD
     A[maingame] --> B[draw_screen]
