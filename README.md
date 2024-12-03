@@ -4,6 +4,11 @@
 
 Pelin suorittaminen ei edellytä erilisiä tiedostoja. Pelin tarvitsemat erilliset kuva- ja äänitiedostot löytyvät juurihakemistosta ja ne on ladattau Free Sound Orgin kaltaisilta ilmaisjakelusivusoilta, joiden sisältö on tekijänoikeuksien näkökulmasta vapaata. Sovellus voidaan käynnistää purkamalla ladattava zip-kansio **ot-harjoitustyo-viikko5.zip** haluttuun sijaintiin, avaamalla puretun kansio juurihakemisto terminaalissa ja ajamalla sitten komento **poetry run invoke start**.
 
+Muut komennot
+Ohjelman testaus: **poetry run invoke test**
+Testikattavuusraportti: **poetry run invoke coverage-report**
+Pylint-tarkastu **poetry run invoke lint**
+
 ## Kuvaus
 
 Pieni videopeli, jossa pelaaja kerää pisteitä keräämällä erilaisia esineitä samalla, kun välttelee hirviöitä. Peli päättyy, kun hirviö saavuttaa pelaajan.
