@@ -7,11 +7,14 @@
 | 24.11 |  4   | Jatkettiin pelin alussa ilmenevän force quit -ongelman ratkomista ja pohditiin mahdollisuutta järjestää peli luokkiin.|
 | 25.11 |  6   | Ratkaistiin edellä mainittu ongelma ja korjattiin koodia Pylintin antamien ohjeiden mukaan.  |
 | 2.12  |  7   | Lisättiin pelin viimeisimmät toiminnallisuudet, sijoitettiin kuvat ja äänet omiin alihakemistoihinsa ja päädyttiin siihen, että peli on nyt sisällöllisesti valmis, eikä uusia toiminnallisuuksia enää lisätä. |
-|  |     |  |
+| 3.12 |   4  | Muodostettiin sekvensikaavio maingame()-funktion toiminnallisuudesta. |
 |       |     |  |
 |   |     |   |
 |   |     |   |
 |       |     |  |
 |   |     |  |
 |    |    | | 
+| :----:|:-----| :-----|
+|  | 26 |  |
+
 
