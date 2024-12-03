@@ -36,61 +36,38 @@
 | + close_program()      |
 +------------------------+
 ```
+graph TD
+    A[maingame()] --> B[draw_screen()]
+    A --> C[clock()]
+    A --> D[Render points and level]
+    D --> D1[Update points text]
+    D --> D2[Check points limit]
+    D --> D3[Update level (difficulty level, loop speed)]
+    D --> D4[Display "LEVEL {difficulty_level}" if applicable]
+    A --> E[Render graphics]
+    E --> E1[Display knight]
+    E --> E2[Display fork]
+    E --> E3[Display knife]
+    E --> E4[Display spoon]
+    A --> F[Handle user input]
+    F --> F1[Arrow keys (up, down, left, right)]
+    F --> F2[Quit event]
+    A --> G[Knight movement]
+    G --> G1[Horizontal (left, right)]
+    G --> G2[Vertical (up, down)]
+    A --> H[Item collection]
+    H --> H1[Fork]
+    H --> H2[Knife]
+    H --> H3[Spoon]
+    A --> I[Skeletons]
+    I --> I1[Initialize positions (skeletons1, skeletons2)]
+    I --> I2[Move skeletons]
+    I --> I3[Collision detection]
+    I3 --> I31[Skeleton 1 collision]
+    I3 --> I32[Skeleton 2 collision]
+    A --> J[End text on collision]
+    A --> K[Update display]
+    A --> L[Timer tick (loop speed)]
 
 
 
-title Main Game Loop
-
-participant Player as P
-participant Game as G
-participant Pygame as PG
-participant SoundManager as SM
-participant Random as R
-
-P -> G: Start maingame()
-loop Main Loop
-    G -> G: draw_screen()
-    G -> PG: clock()
-
-    opt Display points
-        G -> PG: render("POINTS {points}")
-        G -> PG: blit(temp_surface)
-    end
-
-    alt Points reach limit
-        G -> G: Increase difficulty level
-        G -> SM: play_sound("surprise")
-        opt Show "LEVEL" text
-            G -> PG: render(f"LEVEL {difficulty_level}")
-            G -> PG: blit(new_level_text)
-        end
-    end
-
-    G -> PG: blit(knight_pic)
-    G -> PG: blit(fork_pic, knife_pic, spoon_pic)
-
-    loop Handle keypress events
-        P -> G: Key press/release
-        G -> G: Update knight position
-        G -> G: Handle quit event
-    end
-
-    alt Collision with fork/knife/spoon
-        G -> R: Generate new position
-        G -> SM: play_sound("wump")
-        G -> G: Update points
-    end
-
-    loop Handle skeleton movement
-        G -> R: Update skeleton positions
-        alt Collision with knight
-            G -> SM: play_sound("crush")
-            G -> PG: wait(1200ms)
-            G -> G: end_text()
-        end
-        G -> PG: blit(skeleton_pic)
-    end
-
-    G -> PG: flip display
-    G -> PG: tick(loop_speed)
-end
