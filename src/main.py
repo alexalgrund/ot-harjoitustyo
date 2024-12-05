@@ -49,7 +49,6 @@ class GameEngine:
         pygame.quit()
         sys.exit()
 
-
 class CutleryHunt:
 
     def __init__(self):
