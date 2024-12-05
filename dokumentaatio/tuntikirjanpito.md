@@ -9,6 +9,6 @@
 | 2.12  |  7   | Lisättiin pelin viimeisimmät toiminnallisuudet, sijoitettiin kuvat ja äänet omiin alihakemistoihinsa ja päädyttiin siihen, että peli on nyt sisällöllisesti valmis, eikä uusia toiminnallisuuksia enää lisätä. |
 | 3.12 |   4  | Muodostettiin sekvensikaavio maingame()-funktion toiminnallisuudesta. |
 |6.12  |  9 | Jaettiin sovellus toimiviin luokkiin ja useampaan tiedostoon. |
-| Yht. | 32 |
+| Yht. | 41 |
 
 
