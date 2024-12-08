@@ -2,6 +2,8 @@ import os
 from invoke import task
 import subprocess
 
+use_pty = os.name != "nt"
+
 @task
 def foo(ctx):
     print("bar")
@@ -28,9 +30,5 @@ def coverage_report(ctx):
 
 @task
 def pylint(ctx):
-    """Suorittaa pylintin tarkistuksen."""
-    result = subprocess.run(['pylint', '.'], capture_output=True, text=True)
-    print(result.stdout)
-    if result.stderr:
-        print(result.stderr)
+    ctx.run("pylint main database resources", pty=use_pty)
 
