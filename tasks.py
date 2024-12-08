@@ -1,3 +1,4 @@
+import os
 from invoke import task
 import subprocess
 
@@ -8,7 +9,7 @@ def foo(ctx):
 @task
 def start(ctx):
     """Käynnistää ohjelman."""
-    ctx.run("python src/main.py")
+    ctx.run("python main.py")
 
 @task
 def test(ctx):
@@ -26,9 +27,10 @@ def coverage_report(ctx):
     ctx.run("coverage html", pty=True)
 
 @task
-def lint(ctx):
-    """Suorittaa pylintin tarkistuksen src-hakemistolle."""
-    result = subprocess.run(['pylint', 'src'], capture_output=True, text=True)
+def pylint(ctx):
+    """Suorittaa pylintin tarkistuksen."""
+    result = subprocess.run(['pylint', '.'], capture_output=True, text=True)
     print(result.stdout)
     if result.stderr:
         print(result.stderr)
+
