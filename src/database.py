@@ -1,8 +1,6 @@
 import sqlite3
 
-
 class DatabaseManager:
-
     def __init__(self, db_name="scoreBase.db"):
         self.db_name = db_name
         self.db = None
@@ -28,14 +26,27 @@ class DatabaseManager:
 
     def create_database(self):
         try:
-            self.db.execute("""
-                CREATE TABLE IF NOT EXISTS Records (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    score INTEGER UNIQUE,
-                    time INTEGER
-                )
+            self.db = sqlite3.connect(self.db_name)
+            cursor = self.db.cursor()
+            cursor.execute("""
+                SELECT name FROM sqlite_master WHERE type='table' AND name='Records';
             """)
-            print("Table 'Records' is ready.")
+            table_exists = cursor.fetchone()
+
+            if not table_exists:
+                self.db.execute("""
+                    CREATE TABLE Records (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        score INTEGER UNIQUE,
+                        time INTEGER
+                    )
+                """)
+                print("Table 'Records' created.")
+            else:
+                print("Table 'Records' already exists.")
+
+            cursor.close()
+
         except sqlite3.Error as e:
             print(f"Error creating table: {e}")
 
@@ -43,7 +54,7 @@ class DatabaseManager:
         try:
             self.db.execute(
                 "DELETE FROM Records WHERE score=? AND time=?",
-                [score, time]
+                (score, time)
             )
             print(f"Record deleted: Score = {score}, Time = {time}")
         except sqlite3.Error as e:
@@ -52,7 +63,7 @@ class DatabaseManager:
     def fetch_ranked_scores(self):
         try:
             stats = self.db.execute("""
-                SELECT ROW_NUMBER() OVER (ORDER by score DESC, time), score, time
+                SELECT ROW_NUMBER() OVER (ORDER BY score DESC, time), score, time
                 FROM Records
             """).fetchall()
             return stats
@@ -100,8 +111,9 @@ class DatabaseManager:
         try:
             self.db.execute(
                 "INSERT INTO Records (score, time) VALUES (?, ?)",
-                [score, time]
+                (score, time)
             )
+            self.db.commit()
             print(f"Record inserted: Score = {score}, Time = {time}")
         except sqlite3.Error as e:
             print(f"Error inserting record: {e}")

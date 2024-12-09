@@ -1,6 +1,6 @@
 import sys
-import pygame
 from random import randint
+import pygame
 from database import DatabaseManager
 from resources import Resources
 
@@ -20,29 +20,29 @@ class GameEngine:
             self.screen.blit(self.resources.get_image("wall"), (ii, 720))
 
     def clock(self): #Displays the timer of main game.
-            current_time = (
-            f"TIME {self.clock_time[0]:02}:"
-            f"{self.clock_time[1]:02}:"
-            f"{self.clock_time[2]:02}"
-    )
-            self.clock_time[3] += 1
+        current_time = (
+        f"TIME {self.clock_time[0]:02}:"
+        f"{self.clock_time[1]:02}:"
+        f"{self.clock_time[2]:02}"
+        )
+        self.clock_time[3] += 1
 
-            if self.clock_time[3] == 60:
-                self.clock_time[3] = 0
-                self.clock_time[2] += 1
-            if self.clock_time[2] == 60:
-                self.clock_time[2] = 0
-                self.clock_time[1] += 1
-            if self.clock_time[1] == 60:
-                self.clock_time[1] = 0
-                self.clock_time[0] += 1
+        if self.clock_time[3] == 60:
+            self.clock_time[3] = 0
+            self.clock_time[2] += 1
+        if self.clock_time[2] == 60:
+            self.clock_time[2] = 0
+            self.clock_time[1] += 1
+        if self.clock_time[1] == 60:
+            self.clock_time[1] = 0
+            self.clock_time[0] += 1
 
-            end_text1 = self.font2.render(current_time, True, (0, 0, 0))
-            temp_surface = pygame.Surface(end_text1.get_size())
-            temp_surface.fill((192, 192, 192))
-            temp_surface.blit(end_text1, (0, 0))
-            self.screen.blit(temp_surface, temp_surface.get_rect(center=(335, 28)))
-            self.end_time = current_time[4:13]
+        end_text1 = self.font2.render(current_time, True, (0, 0, 0))
+        temp_surface = pygame.Surface(end_text1.get_size())
+        temp_surface.fill((192, 192, 192))
+        temp_surface.blit(end_text1, (0, 0))
+        self.screen.blit(temp_surface, temp_surface.get_rect(center=(335, 28)))
+        self.end_time = f"{self.clock_time[0]:02}:{self.clock_time[1]:02}:{self.clock_time[2]:02}"
 
     def close_program(self):
         self.db.close_database()
@@ -60,6 +60,7 @@ class CutleryHunt:
         self.db = DatabaseManager()
         self.game = GameEngine()
 
+        self.db.create_database()
         self.screen = pygame.display.set_mode((940, 780))
         self.font1 = pygame.font.SysFont("Arial", 24)
         self.font2 = pygame.font.SysFont("Arial", 30, bold=True)
@@ -71,21 +72,25 @@ class CutleryHunt:
     def initial_text(self):
         while True:
             self.game.draw_screen()
+
             intro_text1 = self.font3.render(
-                "The Great Cutlery Hunt of Horrible Horrors", True, (255, 0, 0))
+                "The Great Cutlery Hunt of Horrible Horrors", True, (255, 0, 0)
+            )
             self.screen.blit(intro_text1, intro_text1.get_rect(center=(470, 220)))
-            intro_text2 = ["In this game you face horrible horrors "
-            "while hunting precious silver cutleries.",
-            "Use arrowkeys to gahter cutleries with knight "
-            "while avoiding horrible horrors. ",
-            "Game ends when horrible horror reaches you."]
+
+            intro_text2 = [
+                "In this game you face horrible horrors while hunting precious silver cutleries.",
+                "Use arrowkeys to gather cutleries with knight while avoiding horrible horrors.",
+                "Game ends when horrible horror reaches you."
+            ]
 
             table_count = self.db.get_table_count()
+            intro_text3 = "Enter = New game"
             if table_count > 0:
-                intro_text3 = "Enter = New game   L-Shift = Show Top Scores   ESC = Exit"
-            else:
-                intro_text3 = "Enter = New game"
+                intro_text3 += "   L-Shift = Show Top Scores"
+            intro_text3 += "   ESC = Exit"
 
+            # Render intro texts
             i = 0
             ii = 320
             while i < len(intro_text2):
@@ -96,33 +101,39 @@ class CutleryHunt:
                 i += 1
                 ii += 50
 
+            # Render images
             i = 0
             ii = 420
             while i < 3:
-                self.screen.blit(self.resources.get_image("fork"), self.resources.get_image("fork").get_rect(center=(ii, 610)))
-                self.screen.blit(self.resources.get_image("skeleton"), self.resources.get_image("skeleton").get_rect(center=(370, 610)))
-                self.screen.blit(self.resources.get_image("skeleton"), self.resources.get_image("skeleton").get_rect(center=(570, 610,)))
+                self.screen.blit(self.resources.get_image("fork"),
+                                self.resources.get_image("fork").get_rect(center=(ii, 610)))
+                self.screen.blit(self.resources.get_image("skeleton"),
+                                self.resources.get_image("skeleton").get_rect(center=(370, 610)))
+                self.screen.blit(self.resources.get_image("skeleton"),
+                                self.resources.get_image("skeleton").get_rect(center=(570, 610)))
                 i += 1
                 ii += 50
 
+            # Handle events
             for keypress in pygame.event.get():
                 if keypress.type == pygame.KEYDOWN:
                     if keypress.key == pygame.K_RETURN:
                         self.cycle()
-                    if table_count > 0:
-                        if keypress.key == pygame.K_LSHIFT:
-                            self.show_stats()
-                    if keypress.key == pygame.K_ESCAPE:
+                    elif table_count > 0 and keypress.key == pygame.K_LSHIFT:
+                        self.show_stats()
+                    elif keypress.key == pygame.K_ESCAPE:
                         self.game.close_program()
-                if keypress.type == pygame.QUIT:
+                elif keypress.type == pygame.QUIT:
                     self.game.close_program()
 
             pygame.display.flip()
             self.timer.tick(60)
 
+
     def initialize_game(self): #Initialize all essential variables of game.
         self.points = 0
-        self.end_time = ""
+        self.end_time = 0
+        self.game.clock_time = [0, 0, 0, 0]
         self.record_start_time = None
         self.difficulty_level = 1
         self.loop_speed = 60
@@ -178,12 +189,14 @@ class CutleryHunt:
             pygame.display.flip()
             self.timer.tick(1)
 
-    def maingame(self): #Starts the game.
+    def maingame(self): # Starts the game.
         while True:
             self.game.draw_screen()
             self.game.clock()
 
-            point_text = self.font2.render("POINTS " + str(self.points), True, (0, 0, 0))
+            point_text = self.font2.render(
+                "POINTS " + str(self.points), True, (0, 0, 0)
+            )
             temp_surface1 = pygame.Surface(point_text.get_size())
             temp_surface1.fill((192, 192, 192))
             temp_surface1.blit(point_text, (0, 0))
@@ -191,17 +204,19 @@ class CutleryHunt:
 
             if self.points == self.points_limit:
                 self.difficulty_level += 1
-                self.loop_speed += 10
+                self.loop_speed += 5
                 self.points_limit += 50
                 if self.record_start_time is None:
                     self.record_start_time = pygame.time.get_ticks()
+
             if self.record_start_time and pygame.time.get_ticks() - self.record_start_time <= 3000:
                 self.resources.play_sound("surprise")
-                new_level_text = self.font2.render(f"LEVEL {self.difficulty_level}",
-                True, (0, 0, 0))
-                new_level_rect = new_level_text.get_rect(center=(self.screen.get_width()
-                 // 2, self.screen.get_height() // 2))
+                new_level_text = self.font2.render(
+                    f"LEVEL {self.difficulty_level}", True, (0, 0, 0))
+                new_level_rect = new_level_text.get_rect(
+                    center=(self.screen.get_width() // 2, self.screen.get_height() // 2))
                 self.screen.blit(new_level_text, new_level_rect)
+
             if self.record_start_time and pygame.time.get_ticks() - self.record_start_time > 3000:
                 self.record_start_time = None
 
@@ -216,20 +231,16 @@ class CutleryHunt:
                         self.arrow_left = True
                     if keypress.key == pygame.K_RIGHT:
                         self.arrow_right = True
-
-                if keypress.type == pygame.KEYUP:
-                    if keypress.key == pygame.K_LEFT:
-                        self.arrow_left = False
-                    if keypress.key == pygame.K_RIGHT:
-                        self.arrow_right = False
-
-                if keypress.type == pygame.KEYDOWN:
                     if keypress.key == pygame.K_UP:
                         self.arrow_up = True
                     if keypress.key == pygame.K_DOWN:
                         self.arrow_down = True
 
                 if keypress.type == pygame.KEYUP:
+                    if keypress.key == pygame.K_LEFT:
+                        self.arrow_left = False
+                    if keypress.key == pygame.K_RIGHT:
+                        self.arrow_right = False
                     if keypress.key == pygame.K_UP:
                         self.arrow_up = False
                     if keypress.key == pygame.K_DOWN:
@@ -258,18 +269,18 @@ class CutleryHunt:
                 self.knight_down += 5
                 self.knight_up += 5
 
-            if self.x_fork >= self.knight_left and self.x_fork <= self.knight_right \
-            and self.knight_down >= self.y_fork and self.knight_up <= self.y_fork:
+            if (self.x_fork >= self.knight_left and self.x_fork <= self.knight_right
+                 and self.knight_down >= self.y_fork and self.knight_up <= self.y_fork):
                 self.x_fork = randint(40, 860)
                 self.y_fork = randint(80, 660)
                 self.points += 1
                 self.resources.play_sound("wump")
 
-            if self.x_knife >= self.knight_left and self.x_knife <= self.knight_right \
-            and self.knight_down >= self.y_knife and self.knight_up <= self.y_knife:
+            if (self.x_knife >= self.knight_left and self.x_knife <= self.knight_right
+                 and self.knight_down >= self.y_knife and self.knight_up <= self.y_knife):
                 self.x_knife = randint(1000, 1000)
                 self.y_knife = randint(1000, 1000)
-                self.knife_line = self.knife_line + randint(10, 25)
+                self.knife_line += randint(10, 25)
                 self.points += 1
                 self.resources.play_sound("wump")
                 self.knife_repeat = True
@@ -279,11 +290,11 @@ class CutleryHunt:
                 self.y_knife = randint(80, 660)
                 self.knife_repeat = False
 
-            if self.x_spoon >= self.knight_left and self.x_spoon <= self.knight_right \
-            and self.knight_down >= self.y_spoon and self.knight_up <= self.y_spoon:
+            if (self.x_spoon >= self.knight_left and self.x_spoon <= self.knight_right
+                 and self.knight_down >= self.y_spoon and self.knight_up <= self.y_spoon):
                 self.x_spoon = randint(1000, 1000)
                 self.y_spoon = randint(1000, 1000)
-                self.spoon_line = self.spoon_line + randint(40, 55)
+                self.spoon_line += randint(40, 55)
                 self.points += 1
                 self.resources.play_sound("wump")
 
@@ -306,8 +317,8 @@ class CutleryHunt:
                 x, y = self.skeletons1[i]
                 if x < 1000:
                     x += 5
-                if self.knight_up <= y <= self.knight_down and \
-                    self.knight_left <= x <= self.knight_right:
+                if (self.knight_up <= y <= self.knight_down
+                and self.knight_left <= x <= self.knight_right):
                     self.resources.play_sound("crush")
                     pygame.time.wait(1200)
                     self.end_text()
@@ -320,8 +331,8 @@ class CutleryHunt:
             for i in range(5):
                 x1, y1 = self.skeletons2[i]
                 x1 -= 5
-                if self.knight_up <= y1 <= self.knight_down \
-                    and self.knight_left <= x1 <= self.knight_right:
+                if (self.knight_up <= y1 <= self.knight_down
+                     and self.knight_left <= x1 <= self.knight_right):
                     self.resources.play_sound("crush")
                     pygame.time.wait(1200)
                     self.end_text()
@@ -334,9 +345,14 @@ class CutleryHunt:
             pygame.display.flip()
             self.timer.tick(self.loop_speed)
 
-    def end_text(self): #Displays the player's score, game time
-        # and gives player a possibility to start the game again or close program.
+
+    def end_text(self):  # Displays the player's score, game time
         self.score_check = True
+        self.end_time = (
+            f"{self.game.clock_time[0]:02}:"
+            f"{self.game.clock_time[1]:02}:"
+            f"{self.game.clock_time[2]:02}"
+        )
         table_count = self.db.get_table_count()
         if table_count > 0:
             last_score = self.db.get_last_score()
@@ -364,7 +380,7 @@ class CutleryHunt:
 
             end_text1 = self.font3.render("GAME OVER", True, (255, 0, 0))
             end_text2 = self.font3.render("You got " +
-            str(self.points) + points_anc + str(self.end_time), True, (255, 0, 0))
+            str(self.points) + points_anc + " " + str(self.end_time), True, (255, 0, 0))
             end_text3 = self.font2.render \
                 ("Enter = New game   L-Shift = Show Top Scores   ESC = Exit", True, (255, 0, 0))
 
@@ -376,8 +392,10 @@ class CutleryHunt:
             i = 0
             ii = 420
             while i < 3:
-                self.screen.blit(self.resources.get_image("skeleton"), self.resources.get_image("skeleton").get_rect(center=(ii, 200)))
-                self.screen.blit(self.resources.get_image("skeleton"), self.resources.get_image("skeleton").get_rect(center=(ii, 450)))
+                self.screen.blit(self.resources.get_image("skeleton"),
+                                 self.resources.get_image("skeleton").get_rect(center=(ii, 200)))
+                self.screen.blit(self.resources.get_image("skeleton"),
+                                 self.resources.get_image("skeleton").get_rect(center=(ii, 450)))
                 i += 1
                 ii += 50
 
@@ -396,33 +414,33 @@ class CutleryHunt:
             self.timer.tick(60)
 
     def show_stats(self): #Show game score statistics.
-            stats = self.db.fetch_ranked_scores()
-            stats_text = ["              TOP SCORES","","Rank         Points          Time"]
-            for row in stats:
-                row_constant = ""
-                for _ in range(10-len(str(row[1]))):
-                    row_constant += ".."
-                stats_text.append(str(f"{row[0]} ...............{row[1]}{row_constant}{row[2]}"))
-            stats_text.append(" ")
-            stats_text.append("        ESC =  Return Menu")
+        stats = self.db.fetch_ranked_scores()
+        stats_text = ["              TOP SCORES","","Rank         Points          Time"]
+        for row in stats:
+            row_constant = ""
+            for _ in range(10-len(str(row[1]))):
+                row_constant += ".."
+            stats_text.append(str(f"{row[0]} ...............{row[1]}{row_constant}{row[2]}"))
+        stats_text.append(" ")
+        stats_text.append("        ESC =  Return Menu")
 
-            while True:
-                self.game.draw_screen()
-                for i, text in enumerate(stats_text):
-                    intro_text1 = self.font2.render(text, True, (255, 0, 0))
-                    self.screen.blit(intro_text1, (255, 130 + i * 50))
+        while True:
+            self.game.draw_screen()
+            for i, text in enumerate(stats_text):
+                intro_text1 = self.font2.render(text, True, (255, 0, 0))
+                self.screen.blit(intro_text1, (255, 130 + i * 50))
 
-                for keypress in pygame.event.get():
-                    if keypress.type == pygame.QUIT:
-                        self.game.close_program()
-                    if keypress.type == pygame.KEYDOWN and keypress.key == pygame.K_ESCAPE:
-                        if self.score_check:
-                            self.end_text()
-                        else:
-                            self.initial_text()
+            for keypress in pygame.event.get():
+                if keypress.type == pygame.QUIT:
+                    self.game.close_program()
+                if keypress.type == pygame.KEYDOWN and keypress.key == pygame.K_ESCAPE:
+                    if self.score_check:
+                        self.end_text()
+                    else:
+                        self.initial_text()
 
-                pygame.display.flip()
-                self.timer.tick(60)
+            pygame.display.flip()
+            self.timer.tick(60)
 
     def cycle(self): #A loop used to start a new game.
         self.initialize_game()
@@ -431,5 +449,3 @@ class CutleryHunt:
 
 if __name__ == "__main__":
     CutleryHunt()
-
-

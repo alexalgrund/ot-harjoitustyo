@@ -28,5 +28,8 @@ def coverage_report(ctx):
 
 @task
 def pylint(ctx):
-    ctx.run("pylint main database resources", pty=True)
+    ctx.run("pylint --rcfile=../.pylintrc main database resources", pty=True)
+
+
+
 

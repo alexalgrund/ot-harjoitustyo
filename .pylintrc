@@ -10,7 +10,6 @@ fail-under=10.0
 
 # Add files or directories to the blacklist. They should be base names, not
 # paths.
-[MASTER]
 ignore=
 
 # Add files or directories matching the regex patterns to the blacklist. The
@@ -64,11 +63,11 @@ confidence=
 # Kaikki painikkeet toimivat selvästi ajon aikana, joten poistetaan E1101.
 # Peliin sisältyy mahdollisuus aloittaa uusi peli GAME OVERIn jälkeen, joten
 # poistetaan myös W0201. Muuttujat on kyettävä alustamaan syklisesti uudestaan.
-# Sama pätee myös E0606 -objektiin. 
+# Sama pätee myös E0606 -objektiin.
 disable=raw-checker-failed,
         bad-inline-option,
 	E1101,
-	E0606,
+        E0606,
         locally-disabled,
         file-ignored,
         suppressed-message,
@@ -78,7 +77,7 @@ disable=raw-checker-failed,
         missing-module-docstring,
         missing-function-docstring,
         missing-class-docstring,
-	W0201
+        W0201
 
 # Enable the message, report, category or checker with the given id(s). You can
 # either give multiple identifier separated by comma (,) or put this option
