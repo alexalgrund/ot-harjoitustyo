@@ -2,7 +2,7 @@
 
 ## Pelin käynnistäminen Release-latauksessa
 
-Pelin suorittaminen ei edellytä erilisiä tiedostoja. Pelin tarvitsemat erilliset kuva- ja äänitiedostot löytyvät juurihakemistosta ja ne on ladattau Free Sound Orgin kaltaisilta ilmaisjakelusivusoilta, joiden sisältö on tekijänoikeuksien näkökulmasta vapaata. Sovellus voidaan käynnistää purkamalla ladattava zip-kansio **ot-harjoitustyo-viikko5.zip** haluttuun sijaintiin, avaamalla purettu hakemisto Visual Studio Codessa ja ajamalla sitten komento **poetry run invoke start** src-hakemistossa. Muista myös ajaa tarvittaessa komento **poetry install** ennen invoke-komentoja jos tarvittavat riippuvuudet eivät ole asentuneet.
+Pelin suorittaminen ei edellytä erilisiä tiedostoja. Pelin tarvitsemat erilliset kuva- ja äänitiedostot löytyvät juurihakemistosta ja ne on ladattau Free Sound Orgin kaltaisilta ilmaisjakelusivusoilta, joiden sisältö on tekijänoikeuksien näkökulmasta vapaata. eli voidaan käynnistää purkamalla ladattava zip-kansio ot-harjoitustyo-viikko6.zip haluttuun sijaintiin, ja avaamalla puretun kansio juurihakemisto terminaalissa. Mene sitten terminaalinäkymässä src-hakemistoon ja asenna tarvittavat riippuvuudet ajamalla komento poetry install ennen invoke-komentojen ajamista. Myös invoke-komennot tulee ajaa src-hakemistossa. Taskien tiedostopolut on siis muodostettu juuri niin, että ne eivät ota huomioon juurihakemistoissa tai muissa hakemistoissa annettuja komentoja.
 
 Invoke-komennot (Avaa kansio Visual Studio Codessa ja aja komento src-hakemistossa)
 
