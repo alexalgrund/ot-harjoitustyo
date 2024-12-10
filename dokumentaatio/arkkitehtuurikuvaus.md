@@ -14,6 +14,10 @@ Jos on esimerkiksi on kaksi suoritusta, joiden pistemäärä on sama, mutta peli
   - .pylintrc
   - .README.md
   - tasks.py
+  - dokumentaatio/
+    - arkkitehtuuri.md
+    - changelog.md
+    - tuntikirjanpito.md
   - src/
     - images/
       - fork.png
@@ -35,10 +39,7 @@ Jos on esimerkiksi on kaksi suoritusta, joiden pistemäärä on sama, mutta peli
     - main.py
     - resoucres.py
     - score_base.db
-  - dokumentaatio/
-    - arkkitehtuuri.md
-    - changelog.md
-    - tuntikirjanpito.md
+
     - vaatimusmaarittely.md
     
 ### `ot-harjoitustyo/`
@@ -46,7 +47,9 @@ Jos on esimerkiksi on kaksi suoritusta, joiden pistemäärä on sama, mutta peli
 **.pylintrc**: Määritellee mm. mitkä kaikki virheet otetaan huomioon Pylint-tarkastuksessa.
 **tasks.py**: Sisältää invoke-komentojen ajamista ohjaavan koodin.
 
-#### `ot-harjoitustyo/`
+#### `dokumentaatio/`
+Sisältää projektin vaiheiden kirjanpidon **changelog.md** -tiedostossa ja ohjelman rakennetta koskevat kuvaukset.
+
 
 
 
