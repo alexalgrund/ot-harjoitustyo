@@ -4,7 +4,17 @@ Lataa projektin viimeisimmän [releasen](https://github.com/alexalgrund/ot-harjo
 
 ## Ohjelman käynnistäminen
 
-Peli voidaan käynnistää purkamalla ladattava zip-kansio ot-harjoitustyo-viikko6.zip haluttuun sijaintiin, ja avaamalla puretun kansio juurihakemisto terminaalissa. Mene sitten terminaalinäkymässä src-hakemistoon ja asenna tarvittavat riippuvuudet ajamalla komento `poetry install` ennen invoke-komentojen ajamista. Myös invoke-komennot tulee ajaa src-hakemistossa. Taskien tiedostopolut on siis muodostettu juuri niin, että ne eivät ota huomioon juurihakemistoissa tai muissa hakemistoissa annettuja komentoja. Asennusohjeet ovat samat, jos päädyt terminaalin sijaan avaamaan juurihakemiston Visual Studio Codessa.
+Peli voidaan käynnistää purkamalla ladattava zip-kansio ot-harjoitustyo-viikko6.zip haluttuun sijaintiin, ja avaamalla puretun kansio juurihakemisto terminaalissa. Mene sitten terminaalinäkymässä `src`-hakemistoon ja asenna tarvittavat riippuvuudet ajamalla komento `poetry install` ennen invoke-komentojen ajamista. Myös invoke-komennot tulee ajaa `src`-hakemistossa. Taskien tiedostopolut on siis muodostettu juuri niin, että ne eivät ota huomioon juurihakemistoissa tai muissa hakemistoissa annettuja komentoja. Asennusohjeet ovat samat, jos päädyt terminaalin sijaan avaamaan juurihakemiston Visual Studio Codessa.
+
+### Invoke-komennot ###
+
+Ohjelman suoritus: `poetry run invoke start`
+
+Ohjelman testaus: `poetry run invoke test`
+
+Testikattavuusraportti: `poetry run invoke coverage-report`
+
+Pylint-tarkastu: `poetry run invoke lint`
 
 ## Kirjautuminen
 
