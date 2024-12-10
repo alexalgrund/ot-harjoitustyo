@@ -1,35 +1,10 @@
 # Käyttöohje
 
-Lataa projektin viimeisimmän [releasen](https://github.com/ohjelmistotekniikka-hy/python-todo-app/releases) lähdekoodi valitsemalla _Assets_-osion alta _Source code_.
-
-## Konfigurointi
-
-Tallennukseen käytettävien tiedostojen nimiä voi halutessaan konfiguroida käynnistyshakemistossa _.env_-tiedostossa. Tiedostot luodaan automaattisesti _data_-hakemistoon, jos niitä ei siellä vielä ole. Tiedoston muoto on seuraava:
-
-```
-TODOS_FILENAME=todos.csv
-DATABASE_FILENAME=database.sqlite
-```
+Lataa projektin viimeisimmän [releasen](https://github.com/alexalgrund/ot-harjoitustyo/releases) lähdekoodi valitsemalla _Assets_-osion alta _Source code_.
 
 ## Ohjelman käynnistäminen
 
-Ennen ohjelman käynnistämistä, asenna riippuvuudet komennolla:
-
-```bash
-poetry install
-```
-
-Jonka jälkeen suorita alustustoimenpiteet komennolla:
-
-```bash
-poetry run invoke build
-```
-
-Nyt ohjelman voi käynnistää komennolla:
-
-```
-poetry run invoke start
-```
+Peli voidaan käynnistää purkamalla ladattava zip-kansio ot-harjoitustyo-viikko6.zip haluttuun sijaintiin, ja avaamalla puretun kansio juurihakemisto terminaalissa. Mene sitten terminaalinäkymässä src-hakemistoon ja asenna tarvittavat riippuvuudet ajamalla komento `poetry install` ennen invoke-komentojen ajamista. Myös invoke-komennot tulee ajaa src-hakemistossa. Taskien tiedostopolut on siis muodostettu juuri niin, että ne eivät ota huomioon juurihakemistoissa tai muissa hakemistoissa annettuja komentoja. Asennusohjeet ovat samat, jos päädyt terminaalin sijaan avaamaan juurihakemiston Visual Studio Codessa.
 
 ## Kirjautuminen
 
