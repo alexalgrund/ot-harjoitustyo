@@ -23,23 +23,10 @@ Sovellus avautuu aloitusnäyttö-näkymään:
 
 Näkymässä voi aloittaa uuden pelin hyödyntämällä kuvattuja painikkeita, katsoa tilastoja tietoja tai poistua. Jos päädyn aloittamaa uuden pelin päättymistä seuraa suurinpiirtein
 tällainen loppunäyttö:![Screenshot from 2024-12-10 21-49-54](https://github.com/user-attachments/assets/512bedd3-a149-485d-9259-53502c9f6eb1)
+Tässä tilassa pelin voi aloitusnäyttöä vastaavalla tavalla,joko aloittaa uudestaan, katsoa tilastotietoja tai poistua. Tästä tilasta ei ole enää tarkoituksena päästä
+aloitusnäyttöön.
 
-## Uuden käyttäjän luominen
+## Tietokanta
 
-Kirjautumisnäkymästä on mahdollista siirtyä uuden käyttäjän luomisnäkymään panikkeella "Create user".
-
-Uusi käyttäjä luodaan syöttämällä tiedot syötekenttiin ja painamalla "Create"-painiketta:
-
-![](./kuvat/kayttoohje-uusi-kayttaja.png)
-
-Jos käyttäjän luominen onnistuu, siirrytään siirrytään käyttäjän tekemättömät työt listaavaan näkymään.
-
-## Todojen luominen ja tehdyksi merkkaaminen
-
-Onnistuneen kirjautumisen myötä siirrytään käyttäjän tekemättömät työt listaavaan näkymään:
-
-![](./kuvat/kayttoohje-tehdyksi-merkkaaminen.png)
-
-Näkymä mahdollistaa olemassaolevien todojen merkkaamisen tehdyksi painikkeella "Done" sekä uusien todojen luomisen kirjoittamalla syötekenttään tehtävän kuvauksen ja painamalla "Create"-painiketta.
-
-Klikkaamalla näkymän oikean ylänurkan painiketta "Logout" painamalla käyttäjä kirjautuu ulos sovelluksesta ja sovellus palaa takaisin kirjaantumisnäkymään.
+Ohjelma luo automaattisesti pistetilastoja ylläpitävän SQL-tietokannan, jos sellaista ei ole vielä. Ohjelman release-versio sisältää jo jonkilaisia valmiita rekisteröityjä 
+pelisuorituksia.
