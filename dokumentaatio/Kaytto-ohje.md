@@ -21,8 +21,8 @@ Pylint-tarkastu: `poetry run invoke lint`
 Sovellus avautuu aloitusnäyttö-näkymään:
 ![Screenshot from 2024-12-10 21-47-07](https://github.com/user-attachments/assets/26832227-4ef6-4708-8812-44728e00a872)
 
-
-Kirjautuminen onnistuu kirjoittamalla olemassaoleva käyttäjätunnus sekä syötekenttään ja painamalla "Login"-painiketta.
+Näkymässä voi aloittaa uuden pelin hyödyntämällä kuvattuja painikkeita, katsoa tilastoja tietoja tai poistua. Jos päädyn aloittamaa uuden pelin päättymistä seuraa suurinpiirtein
+tällainen loppunäyttö:![Screenshot from 2024-12-10 21-49-54](https://github.com/user-attachments/assets/512bedd3-a149-485d-9259-53502c9f6eb1)
 
 ## Uuden käyttäjän luominen
 
