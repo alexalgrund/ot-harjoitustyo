@@ -46,7 +46,7 @@ Jos on esimerkiksi on kaksi suoritusta, joiden pistemäärä on sama, mutta peli
 **.pylintrc**: Määritellee mm. mitkä kaikki virheet otetaan huomioon Pylint-tarkastuksessa.
 **tasks.py**: Sisältää invoke-komentojen ajamista ohjaavan koodin.
 
-### `ot-harjoitustyo/`
+#### `ot-harjoitustyo/`
 
 
 
