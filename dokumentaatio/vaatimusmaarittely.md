@@ -25,7 +25,7 @@ Päävalikko ¦ TEHTY -> Käyttöliitymä on tämän suunnitelman mukainen. Ei t
 ### Ennen kirjautumista
 Päädytiin siihen, että erityistä kirjautumista ei toistaiseksi suunnitella, mutta toisaalta pelaajien olisi mahdollista tarkastella omia pistetilastojaan ja saada tietoa peliin käyttämästään ajasta,
 jos tällainen ominaisuus olisi. | HYLÄTTY -> Peli on siinä määrin yksinkertainen, että oman nimimerkin lisääminen ei tuo pelaajalla suurta lisäinformaatiota. Tällainen ominaisuus soveltunee
-paremmin laajempiin arca-peleihin, joissa on esimerkiksi useita erilaisia kenttiä.
+paremmin laajempiin arcade-peleihin, joissa on esimerkiksi useita erilaisia kenttiä.
 
 ### Kirjautumisen jälkeen
 
