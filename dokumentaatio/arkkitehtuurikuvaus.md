@@ -45,7 +45,9 @@ Jos on esimerkiksi on kaksi suoritusta, joiden pistemäärä on sama, mutta peli
     
 ### `ot-harjoitustyo/`
 **.coveragerc**: Määrittelee mm. mistä hakemistosta testikattavuusraportti kerätään.
+
 **.pylintrc**: Määritellee mm. mitkä kaikki virheet otetaan huomioon Pylint-tarkastuksessa.
+
 **tasks.py**: Sisältää invoke-komentojen ajamista ohjaavan koodin.
 
 #### `dokumentaatio/`
