@@ -53,12 +53,19 @@ Sisältää projektin vaiheiden kirjanpidon **changelog.md** -tiedostossa ja ohj
 
 #### `src/`
 **images/**: Ohjelman kuvatiedostot.
+
 **sounds/**: Ohjelman äänitiedostot.
+
 **tests/**: Ohjelmassa ajattevien testien kannalta keskeiset tiedot ja niitä ohjaava koodi **main_test.py** - tiedostossa.
+
 **database.py**: Ohjelman tietokantaa hallinoiva moduuli.
+
 **game_engine.py**: Pelimoottoria hallinoiva moduuli.
+
 **main.py**: Pääpelin moduuli.
+
 **resources.py**: Ohjelman kuva- ja äänitiedostoja sekä niitten toistamista hallinoiva moduuli.
+
 **score_base.db**: Ohjelman SQL-tietokanta.
 
 
