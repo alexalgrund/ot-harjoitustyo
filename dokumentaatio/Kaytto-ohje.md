@@ -24,7 +24,7 @@ Sovellus avautuu aloitusnäyttö-näkymään:
 Näkymässä voi aloittaa uuden pelin hyödyntämällä kuvattuja painikkeita, katsoa tilastoja tietoja tai poistua. Jos päädyt aloittamaa uuden pelin päättymistä seuraa suurinpiirtein
 tällainen loppunäyttö:![Screenshot from 2024-12-10 21-49-54](https://github.com/user-attachments/assets/512bedd3-a149-485d-9259-53502c9f6eb1)
 
-Tässä tilassa pelin voi aloitusnäyttöä vastaavalla tavalla,joko aloittaa uudestaan, katsoa tilastotietoja tai poistua. Tästä tilasta ei ole enää tarkoituksena päästä
+Tässä tilassa pelin voi aloitusnäyttöä vastaavalla tavalla, joko aloittaa uudestaan, katsoa tilastotietoja tai poistua. Tästä tilasta ei ole enää tarkoituksena päästä
 aloitusnäyttöön.
 
 ## Tietokanta
