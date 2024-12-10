@@ -18,9 +18,9 @@ Pylint-tarkastu: `poetry run invoke lint`
 
 ## Kirjautuminen
 
-Sovellus käynnistyy kirjautumisnäkymään:
+Sovellus avautuu aloitusnäyttö-näkymään:
+![Screenshot from 2024-12-10 21-47-07](https://github.com/user-attachments/assets/26832227-4ef6-4708-8812-44728e00a872)
 
-![](./kuvat/kayttoohje-kirjautuminen.png)
 
 Kirjautuminen onnistuu kirjoittamalla olemassaoleva käyttäjätunnus sekä syötekenttään ja painamalla "Login"-painiketta.
 
