@@ -18,6 +18,7 @@ Jos on esimerkiksi on kaksi suoritusta, joiden pistemäärä on sama, mutta peli
     - arkkitehtuuri.md
     - changelog.md
     - tuntikirjanpito.md
+    - vaatimusmaarittely.md
   - src/
     - images/
       - fork.png
@@ -40,7 +41,7 @@ Jos on esimerkiksi on kaksi suoritusta, joiden pistemäärä on sama, mutta peli
     - resoucres.py
     - score_base.db
 
-    - vaatimusmaarittely.md
+
     
 ### `ot-harjoitustyo/`
 **.coveragerc**: Määrittelee mm. mistä hakemistosta testikattavuusraportti kerätään.
@@ -49,6 +50,30 @@ Jos on esimerkiksi on kaksi suoritusta, joiden pistemäärä on sama, mutta peli
 
 #### `dokumentaatio/`
 Sisältää projektin vaiheiden kirjanpidon **changelog.md** -tiedostossa ja ohjelman rakennetta koskevat kuvaukset.
+
+#### `src/`
+**images/**: Ohjelman kuvatiedostot.
+**sounds/**: Ohjelman äänitiedostot.
+**tests/**: Ohjelmassa ajattevien testien kannalta keskeiset tiedot ja niitä ohjaava koodi **main_test.py** - tiedostossa.
+**database.py**: Ohjelman tietokantaa hallinoiva moduuli.
+**game_engine.py**: Pelimoottoria hallinoiva moduuli.
+**main.py**: Pääpelin moduuli.
+**resources.py**: Ohjelman kuva- ja äänitiedostoja sekä niitten toistamista hallinoiva moduuli.
+**score_base.db**: Ohjelman SQL-tietokanta.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
