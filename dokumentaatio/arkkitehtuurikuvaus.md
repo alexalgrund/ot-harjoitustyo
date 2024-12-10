@@ -16,13 +16,29 @@ Jos on esimerkiksi on kaksi suoritusta, joiden pistemäärä on sama, mutta peli
   - .README.md
   - tasks.py
   - src/
-    - main.py  
-    - utils/
-      - helper.py
-    - models/
-      - model.py
+    - images/
+      - fork.png
+      - knife.png
+      - knight.png
+      - skeleton.png
+      - spoon.png
+      - wall.png
+    - sounds/
+      - beep.wav
+      - crush.wav
+      - surpirse.wav
+      - wump.wav
+    - tests/
+      - __init__.py
+      - main_test.py
+    - database.py
+    - game_engine.py
+    - main.py
+    - resoucres.py
+    - score_base.db
   - dokumentaatio/
     - arkkitehtuuri.md
+    - changelog.md
     - tuntikirjanpito.md
     - vaatimusmaarittely.md
 
