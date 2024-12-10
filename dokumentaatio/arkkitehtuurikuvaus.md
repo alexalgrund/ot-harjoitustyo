@@ -10,6 +10,7 @@ Jos on esimerkiksi on kaksi suoritusta, joiden pistemäärä on sama, mutta peli
 ## Hakemistorakenne
 
 ot-harjoitustyo
+
 -> dokumentaatio
   ->
 -> src
