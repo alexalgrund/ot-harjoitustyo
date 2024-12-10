@@ -1,5 +1,5 @@
 import unittest
-from main import CutleryHunt
+from main import MainGame
 import pygame
 import sys
 import os

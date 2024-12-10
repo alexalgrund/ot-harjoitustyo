@@ -1,57 +1,21 @@
-import sys
 from random import randint
 import pygame
+from game_engine import GameEngine
 from database import DatabaseManager
 from resources import Resources
 
-class GameEngine:
+class MainGame:
+    """Class which manages games's user interface
+
+    Attributes:
+        resources: pPicture and sound management module.
+        db: Database management module.
+        game: Game engine management module.
+    """
 
     def __init__(self):
-        self.db = DatabaseManager()
-        self.resources = Resources()
-        self.screen = pygame.display.set_mode((940, 780))
-        self.clock_time =[0, 0, 0, 0]
-        self.font2 = pygame.font.SysFont("Arial", 30, bold=True)
-
-    def draw_screen(self):
-        self.screen.fill((80, 0, 0))
-        for ii in range(0, 55 * 17, 55):
-            self.screen.blit(self.resources.get_image("wall"), (ii, 0))
-            self.screen.blit(self.resources.get_image("wall"), (ii, 720))
-
-    def clock(self): #Displays the timer of main game.
-        current_time = (
-        f"TIME {self.clock_time[0]:02}:"
-        f"{self.clock_time[1]:02}:"
-        f"{self.clock_time[2]:02}"
-        )
-        self.clock_time[3] += 1
-
-        if self.clock_time[3] == 60:
-            self.clock_time[3] = 0
-            self.clock_time[2] += 1
-        if self.clock_time[2] == 60:
-            self.clock_time[2] = 0
-            self.clock_time[1] += 1
-        if self.clock_time[1] == 60:
-            self.clock_time[1] = 0
-            self.clock_time[0] += 1
-
-        end_text1 = self.font2.render(current_time, True, (0, 0, 0))
-        temp_surface = pygame.Surface(end_text1.get_size())
-        temp_surface.fill((192, 192, 192))
-        temp_surface.blit(end_text1, (0, 0))
-        self.screen.blit(temp_surface, temp_surface.get_rect(center=(335, 28)))
-        self.end_time = f"{self.clock_time[0]:02}:{self.clock_time[1]:02}:{self.clock_time[2]:02}"
-
-    def close_program(self):
-        self.db.close_database()
-        pygame.quit()
-        sys.exit()
-
-class CutleryHunt:
-
-    def __init__(self):
+        """Class constructor. Initialize game's critical architecture and textures.
+        """
         pygame.init()
         pygame.mixer.init()
         pygame.display.set_caption("The Great Cutlery Hunt of Horrible Horrors")
@@ -70,6 +34,9 @@ class CutleryHunt:
         self.initial_text()
 
     def initial_text(self):
+        """Displays game's intial texts and enables new game,
+        top scores and game exit functionalities.
+        """
         while True:
             self.game.draw_screen()
 
@@ -131,6 +98,9 @@ class CutleryHunt:
 
 
     def initialize_game(self): #Initialize all essential variables of game.
+        """Intiliaze game's critical attributes. Attributes are handled in their
+        own function because because they have to be reset every time new game is started.
+        """
         self.points = 0
         self.end_time = 0
         self.game.clock_time = [0, 0, 0, 0]
@@ -167,6 +137,9 @@ class CutleryHunt:
         self.arrow_down = False
 
     def countdown(self): #Gives 5 seconds time for player to get ready.
+        """Counts five seconds countdown before the game starts,
+        so the player can prepare.
+        """
         self.count = 5
         while self.count > -1:
             self.game.draw_screen()
@@ -190,6 +163,8 @@ class CutleryHunt:
             self.timer.tick(1)
 
     def maingame(self): # Starts the game.
+        """Run the core game until the player either loses or quits the game.
+        """
         while True:
             self.game.draw_screen()
             self.game.clock()
@@ -346,7 +321,10 @@ class CutleryHunt:
             self.timer.tick(self.loop_speed)
 
 
-    def end_text(self):  # Displays the player's score, game time
+    def end_text(self):
+        """Displays the end text after player had lost and enables new game,
+        top scores and game exit functionalities.
+        """
         self.score_check = True
         self.end_time = (
             f"{self.game.clock_time[0]:02}:"
@@ -413,7 +391,9 @@ class CutleryHunt:
             pygame.display.flip()
             self.timer.tick(60)
 
-    def show_stats(self): #Show game score statistics.
+    def show_stats(self):
+        """Displays top scores if the player chooses to select this functionality
+        """
         stats = self.db.fetch_ranked_scores()
         stats_text = ["              TOP SCORES","","Rank         Points          Time"]
         for row in stats:
@@ -442,10 +422,12 @@ class CutleryHunt:
             pygame.display.flip()
             self.timer.tick(60)
 
-    def cycle(self): #A loop used to start a new game.
+    def cycle(self):
+        """Allows you to start a new game after the splash screen.
+        """
         self.initialize_game()
         self.countdown()
         self.maingame()
 
 if __name__ == "__main__":
-    CutleryHunt()
+    MainGame()

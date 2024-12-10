@@ -75,8 +75,6 @@ disable=raw-checker-failed,
         deprecated-pragma,
         use-symbolic-message-instead,
         missing-module-docstring,
-        missing-function-docstring,
-        missing-class-docstring,
         W0201
 
 # Enable the message, report, category or checker with the given id(s). You can

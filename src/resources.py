@@ -2,10 +2,17 @@ import os
 import pygame
 
 class Resources:
+    """Class which provides and manages game's graphic and sound assets.
+
+    Attributes:
+        images_path: Directory pointer for image download.
+        sounds_path: Directory pointer for sound download.
+        self.images: Image files abstractions.
+        self.sounds: Sound files abstractions.
+    """
 
     def __init__(self):
         self.images_path = os.path.join(os.path.dirname(__file__), "images")
-        self.sounds_path = os.path.join(os.path.dirname(__file__), "sounds")
 
         #Download pictures
         self.images = {
@@ -27,7 +34,20 @@ class Resources:
         }
 
     def get_image(self, image_name):
+        """Displays images in main game.
+
+        Args:
+            image_name (file): file abstraction
+
+        Returns:
+            type: image display
+        """
         return self.images.get(image_name)
 
     def play_sound(self, voice_name):
+        """Plays sound in main game.
+
+        Args:
+            voice_name (file): file abstraction
+        """
         self.sounds[voice_name].play()
