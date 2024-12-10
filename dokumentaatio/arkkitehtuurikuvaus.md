@@ -29,7 +29,7 @@ Jos on esimerkiksi on kaksi suoritusta, joiden pistemäärä on sama, mutta peli
       - surpirse.wav
       - wump.wav
     - tests/
-      - _init_.py
+      - __init__.py
       - main_test.py
     - database.py
     - game_engine.py
