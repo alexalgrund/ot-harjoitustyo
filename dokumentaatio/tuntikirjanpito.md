@@ -11,6 +11,7 @@
 |6.12.  |  9 | Jaettiin sovellus toimiviin luokkiin ja useampaan tiedostoon. |
 |8.12.  |  6 | Varmistettiin invoke-komentojen toimivuus. |
 |9.12.  |  6 | Korjattiin viimeisimmät pylint-virheet ja tarkistettiin tietokannan toimivuus. |
-| Yht. | 53 |
+|9.12.  |  8 | Suoritettiin docstring-dokumentaatio, luotiin arkkitehtuurikuvaus sekä käyttöohje. Sovellus on nyt rakenteellisesti valmis. Viimesimpänä asiana testien kirjoittaminen. |
+| Yht. | 61 |
 
 
