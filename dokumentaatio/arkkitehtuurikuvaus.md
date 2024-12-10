@@ -9,17 +9,21 @@ Jos on esimerkiksi on kaksi suoritusta, joiden pistemäärä on sama, mutta peli
 
 ## Hakemistorakenne
 
-- project/
+- ot-harjoitustyo/
+  - .coverage
+  - .coveragerc
+  - .pylintrc
+  - .README.md
+  - tasks.py
   - src/
     - main.py  
     - utils/
       - helper.py
     - models/
       - model.py
-  - tests/
-    - test_main.py
-  - docs/
-    - README.md
-  - requirements.txt
+  - dokumentaatio/
+    - arkkitehtuuri.md
+    - tuntikirjanpito.md
+    - vaatimusmaarittely.md
 
 
