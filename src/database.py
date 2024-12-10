@@ -9,7 +9,7 @@ class DatabaseManager:
         connect(): Calls the function needed to establish a database connection.
     """
 
-    def __init__(self, db_name="scoreBase.db"):
+    def __init__(self, db_name="score_base.db"):
         self.db_name = db_name
         self.db = None
         self.connect()

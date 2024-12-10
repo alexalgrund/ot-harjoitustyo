@@ -1,5 +1,4 @@
 ## Viikko3
-
 - Luotiin pelin runko src-tiedostoon ja rakennettiin kokeilumielessä muutama alustava testi.
 
 Ongelmia:
@@ -7,7 +6,6 @@ Ongelmia:
 - Pelissä ilmenee suorituksen aikana "main not respond" -viiveitä, jotka eivät ole kriittisiä pelin suorituksella.
 
 ## Viikko 4
-
 - Yritettiin jakaa ohjelma luokkiin, mutta havaittiin että tämä lähinnä vaikeuttaa ohjelman toimintaan, joten pitäydytään proseduraalisessa ohjelmointityylissä.
 Ongelma saatiin korjattua vasta refaktoroimmalla konstruktorin ja funktion initialize_game() sisällöt.
 - Koska edellisellä viikolla toteutettiin toiminnallisuuksia verraten paljon tällä viikolla keskityttin yksityiskohtiin. Muutettiin hieman käyttöliittymän
@@ -20,7 +18,7 @@ ominaisuuksia, joten luovutaan siitä.
 Tästä ei kuitenkaan aiheudu pelin suorituksen kannalta ongelmaa, joten suljetaan tapaus W0201 Pylint-ilmoitusten ulkopuolella.
 2. Peliin kuuluu mahdollisuus aloittaa uusi peli GAME OVERIN jälkeen, joten keskeisiä muuttujia ei kannata alustaa konstruktorissa, vaan
 niitä varten tarvitaan oma funktionsa, jota voidaan toisintaa. Pylint on tästä eri mieltä, joten suljetaan myös tapaukset E1101 ja E0606
-Pylint-testauksen ulkopuolelle. 
+Pylint-testauksen ulkopuolelle.
 
 ## Viikko5
 - Lisättiin ohjelmaan ominaisuudet: vaikeustason nousu ja ilmoitus, kun pelaaja saavuttaa uuden piste-ennätyksen. Pelin vaikeustaso nousee 50 pisteen välein siten,
@@ -30,3 +28,11 @@ että pääsilmukan suoritusnopeus kasvaa aina tällöin 10 yksiköllä.
 käytetään järjestämällä nyt proseduraalisessa muodossa oleva koodi luokkiin, tekemällä tältä kannalta tarpeellinen refaktorointi ja kirjoittamalla pelille
 riittävän kattava testitiedosto.
 - Lisättiin myös sekvensikaavio kuvaamaan pelin pääluokkaa eli funktiota maingame().
+
+## Viikko6
+- Korjattiin viimesimmä Pylint-virheet ja jaettiin ohjelma mielekkäisiin luokkiin ja useampaan tiedostoon.
+- Laadittiin ohjelman rakennetta kuvaava arkkitehtuurikuvaus, käyttöohje sekä suoritettiin docstring-dokumentaatio.
+- Tarkistettiin SQL-tietokannan toimivuus Release-versiota varten.
+- Ohjelma on rakenteellisesti lopullisessa muodossaan, eikä sitä aleta enää kehittämään enempää muute kuin bugien ilmetessä.
+Projektin viimeisimmät viikot käytetään ohjelman testien kirjoittamiseen.
+
