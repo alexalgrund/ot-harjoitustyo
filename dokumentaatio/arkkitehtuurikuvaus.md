@@ -9,10 +9,6 @@ Jos on esimerkiksi on kaksi suoritusta, joiden pistemäärä on sama, mutta peli
 
 ## Hakemistorakenne
 
-ot-harjoitustyo
-
--> dokumentaatio
-  ->
--> src
+project/ ├── src/ # Lähdekoodi │ ├── main.py # Pääohjelma │ ├── utils/ # Apufunktiot ja -moduulit │ └── models/ # Tietomallit ├── tests/ # Testit ├── docs/ # Dokumentaatio └── requirements.txt # Riippuvuudet
 
 
