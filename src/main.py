@@ -256,7 +256,7 @@ class MainGame:
                 self.x_knife = randint(1000, 1000)
                 self.y_knife = randint(1000, 1000)
                 self.knife_line += randint(10, 25)
-                self.points += 2
+                self.points += 1
                 self.resources.play_sound("wump")
                 self.knife_repeat = True
 
@@ -270,7 +270,7 @@ class MainGame:
                 self.x_spoon = randint(1000, 1000)
                 self.y_spoon = randint(1000, 1000)
                 self.spoon_line += randint(40, 55)
-                self.points += 3
+                self.points += 1
                 self.resources.play_sound("wump")
 
             if self.points == self.spoon_line and self.spoon_repeat is True:

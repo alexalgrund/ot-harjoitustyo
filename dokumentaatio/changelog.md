@@ -36,3 +36,8 @@ riittävän kattava testitiedosto.
 - Ohjelma on rakenteellisesti lopullisessa muodossaan, eikä sitä aleta enää kehittämään enempää muute kuin bugien ilmetessä.
 Projektin viimeisimmät viikot käytetään ohjelman testien kirjoittamiseen.
 
+## Viikko7
+- Peli on valmis arviointia varten.
+- Päädytään siihen, että pelin automatisoitu testaus on vaikeasti saavutettavissa sillä peli ei sisällä niin selkeitä in- ja outputteja. Mielekkäiden testien laatiminen vaatisi myös paljon sellaista osaamista, jota tällä kurssilla ei käsitellä. Testausdokumenttia ei tästä syystä liitetä tällä kertaa mukaan. Loppullisesta vaatimusmäärittellystä käyvät ilmi pelin luomisen eri vaiheet siltä varalta, että esitettyihin ideoihin on mielekiintoa palata vielä myöhemmin.
+- Projektissa on käytetty kielimalleja ChatGPT ja Google Gemini soveltuvin osin koodin debuggaukseen, generointiin ja rakenteen parantamiseen.
+
